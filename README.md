@@ -2,7 +2,45 @@
 
 # Imitation Learning
 
+
+
 # Model Based Reinforcement Learning
+At a high level, you use a model of the enviroment (continuous or discrete) to do some sort of planning or simulation in order to generate your policy. 
+
+This model can be given in the simple case (you know the MDP, or maybe you know physics, or you have a simulator or something) or in practice we more generally try to learn the model.
+
+Learning the model can be done with simple techniques such as linearizing the system and using finite differences, or more recently treating the model dynamics as a supervised learning problem and training a deep network.
+
+
+## Control Systems Based Approaches (Continuous Domains)
+If the underlying physical dynamics of a continuous system are known, then we can use control theory to solve these types of problems. 
+
+There is an algorithm known as LQR which can do control. It can output the necessary sequence of actions to do something like push a puck to a target. 
+
+
+
+One such a
+
+
+## Planning Based Approaches (Discrete Domains)
+MCTS
+
+
+## Model Based & Model Free Combinations
+DYNA Algorithm
+
+
+
+
+
+# Model Free Based Reinforcement Learning
+
+
+
+
+
+
+
 
 A barebones CUDA-enabled PyTorch implementation of the CapsNet architecture in the paper "Dynamic Routing Between Capsules" by [Kenta Iwasaki](https://github.com/iwasaki-kenta) on behalf of Gram.AI.
 
