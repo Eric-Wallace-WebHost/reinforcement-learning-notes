@@ -3,7 +3,34 @@ This is where I know the most, but it is still hard to keep up with Arxiv (in)sa
 
 
 
+Policy Gradient Methods
 
+Key Algorithms
+A3C
+TRPO
+PPO
+ACER
+ACKTR
+DDPG
+DDDDPG (ICLR)
+
+
+Value Learning / Q - Learning
+
+Key Algorithms
+DQN
+Double DQN
+Dueling DQN
+Distrubtional DQN (new updated paper a few days ago)
+Noisy Nets
+Prioritized Experience Replay
+Rainbow (combines all of them)
+
+
+Other ideas
+
+UNREAL
+Nueral Episodic Control
 
 
 # Imitation Learning / Behavorial Cloning
@@ -76,6 +103,11 @@ Learning References:
 
 Key Papers:
 [Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864)
+
+
+
+## Sim2Real Transfer
+There is a lot of new work in this area from the usual suspects (OpenAI, Berkeley, Deepmind). It is a really promising approach to use a simulator to train a policy and then transfer that policy to a real robot.
 
 
 
