@@ -1,6 +1,5 @@
-# Model Free Based Reinforcement Learning
+# Model Free Reinforcement Learning
 This is where I know the most, but it is still hard to keep up with Arxiv (in)sanity.
-
 
 
 Policy Gradient Methods
@@ -13,7 +12,9 @@ ACER
 ACKTR
 DDPG
 DDDDPG (ICLR)
-
+Generalized Advantage Estimation
+Benchmarking Continuous Control
+Towards Generalization and Simplicity in Continuous Control
 
 Value Learning / Q - Learning
 
