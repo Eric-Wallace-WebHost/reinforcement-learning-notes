@@ -20,7 +20,7 @@ Learning References:
 
 Key Papers:
 * [End to End Learning for Self Driving Cars (Nvidia 2016)](https://arxiv.org/abs/1604.07316) Nvidia trains a self driving car using an end to end convolutional neural network. It is trained directly from human driving footage. They also do neat tricks with using three cameras that view the road from different angles (see berkeley course above for explanation)
-* [Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) Berkeley crew uses Virtual Reality Gear for Imitation Learning.
+* [Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) Berkeley crew uses Virtual Reality Gear for Imitation Learning. They are now scaling this at their startup.
 
 # Model Based Reinforcement Learning
 At a high level, you use a model of the enviroment (continuous or discrete) to do some sort of planning or simulation in order to generate your policy. 
@@ -47,7 +47,7 @@ DYNA Algorithm
 
 __TODO__: This is mentioned in David Silver's lectures
 
-References:
+Learning References:
 * [Berkeley Deep RL Course Lecture 3-6](https://www.youtube.com/watch?v=mZtlW_xtarI&index=3&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX) discusses model based reinforcement learning in depth.
 * [Lecture 9 of Berkeley Reinforcement Learning Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures) discusses LQR, MPC, and guided policy search.
 * [Lecture 8 of David Silver's Reinforcement Learning Course](https://www.youtube.com/watch?v=ItMutbeOHtc&index=8&list=PLzuuYNsE1EZAXYR4FJ75jcJseBmo4KQ9-) discusses learning models, DYNA, and MCTS
@@ -64,69 +64,18 @@ __TODO__: I don't know anything about this
 
 Key Papers:
 * [Learning to Learn with Opponent Learning Awareness (LOLA)](https://arxiv.org/abs/1709.04326)
+* [Multi-Agent Actor Critic](https://arxiv.org/abs/1706.02275)
+
+## Derivative Free Optimization
+A broad class of algorithms that consists of things like Genetic Algorithms, Evolutionary Algorithms, Evolutionary Search, and closely related others. Most of these algorithms are essentially random parameter search + heuristics. In the case when a derivative can be computed analytically (supervised learning, Q learning, policy gradients using reinforce trick), these algorithms are dumb because they don't move in that direction.
+
+The only main advantage of these algorithms is that they can be scaled really well in parallel. The best paper is OpenAI's work that uses a clever trick where the seperate workers exchange what random seed they used rather than the actual parameters of the system.
+
+Learning References:
+[Lecture 8 of Berkeley Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures)
+
+Key Papers:
+[Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864)
 
 
 
-A barebones CUDA-enabled PyTorch implementation of the CapsNet architecture in the paper "Dynamic Routing Between Capsules" by [Kenta Iwasaki](https://github.com/iwasaki-kenta) on behalf of Gram.AI.
-
-Training for the model is done using [TorchNet](https://github.com/pytorch/tnt), with MNIST dataset loading and preprocessing done with [TorchVision](https://github.com/pytorch/vision).
-
-## Description
-
-> A capsule is a group of neurons whose activity vector represents the instantiation parameters of a specific type of entity such as an object or object part. We use the length of the activity vector to represent the probability that the entity exists and its orientation to represent the instantiation paramters. Active capsules at one level make predictions, via transformation matrices, for the instantiation parameters of higher-level capsules. When multiple predictions agree, a higher level capsule becomes active. We show that a discrimininatively trained, multi-layer capsule system achieves state-of-the-art performance on MNIST and is considerably better than a convolutional net at recognizing highly overlapping digits. To achieve these results we use an iterative routing-by-agreement mechanism: A lower-level capsule prefers to send its output to higher level capsules whose activity vectors have a big scalar product with the prediction coming from the lower-level capsule.
-
-Paper written by Sara Sabour, Nicholas Frosst, and Geoffrey E. Hinton. For more information, please check out the paper [here](https://arxiv.org/abs/1710.09829).
-
-__Note__: Affine-transformations for the data augmentation stage have not been implemented yet. This implementation only provides an efficient implementation for the dynamic routing procedure, example CapsNet architecture, and squashing functions mentioned in the paper.
-
-## Requirements
-
-* Python 3
-* PyTorch
-* TorchVision
-* TorchNet
-* TQDM
-* Visdom
-
-## Usage
-
-**Step 1** Adjust the number of training epochs, batch sizes, etc. inside `capsule_network.py`.
-
-```python
-BATCH_SIZE = 100
-NUM_CLASSES = 10
-NUM_EPOCHS = 30
-NUM_ROUTING_ITERATIONS = 3
-```
-
-**Step 2** Start training. The MNIST dataset will be downloaded if you do not already have it in the same directory the script is run in. Make sure to have Visdom Server running!
-
-```console
-$ sudo python3 -m visdom.server & python3 capsule_network.py
-```
-
-## Benchmarks
-
-Highest accuracy was 99.48% after 30 epochs. The model may achieve a higher accuracy as shown by the trend of the test accuracy/loss graphs below.
-
-![Training progress.](media/Benchmark.png)
-
-Default PyTorch Adam optimizer hyperparameters were used with no learning rate scheduling. Epochs with batch size of 100 takes ~3 minutes on a Razer Blade w/ GTX 1050. 
-
-## TODO
-
-* Extension to other datasets apart from MNIST.
-
-## Credits
-
-Primarily referenced these two TensorFlow and Keras implementations:
-1. [Keras implementation by @XifengGuo](https://github.com/XifengGuo/CapsNet-Keras)
-2. [TensorFlow implementation by @naturomics](https://github.com/naturomics/CapsNet-Tensorflow)
-
-Many thanks to [@InnerPeace-Wu](https://github.com/InnerPeace-Wu) for a [discussion on the dynamic routing procedure](https://github.com/XifengGuo/CapsNet-Keras/issues/1) outlined in the paper.
-
-## Contact/Support
-
-Gram.AI is currently heavily developing a wide number of AI models to be either open-sourced or released for free to the community, hence why we cannot guarantee complete support for this work.
-
-If any issues come up with the usage of this implementation however, or if you would like to contribute in any way, please feel free to send an e-mail to [kenta@gram.ai](kenta@gram.ai) or open a new GitHub issue on this repository.
