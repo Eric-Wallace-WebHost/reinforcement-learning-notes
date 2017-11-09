@@ -1,20 +1,30 @@
 # Model Free Reinforcement Learning
-This is where I know the most, but it is still hard to keep up with Arxiv (in)sanity.
+A general class of algorithms that makes no attempt to learn the underlying dynamics of the system, nor do any planning in the future. This can cause large sample inefficiencies, but in practice these algorithms currently learn the best policies out of all classes of algorithms.
 
+## Policy Gradient Methods
+Directly optimize the policy by analytically computing the gradient using the "REINFORCE" or likelihood ratio trick. These algorithms are extremely well suited for learning continuous control tasks such as the MuJoCo simulator. They sometimes have worse sample complexity than Q-Learning algorithms as it is difficult to learn off-policy in policy gradient techniques.
 
-Policy Gradient Methods
+Learning Resources:
+* [Berkeley Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures)
+* [David Silver Lecture 7](https://www.youtube.com/watch?v=KHZVXao4qXs&t=15s)
+* [Berkeley Deep RL Course](https://www.youtube.com/watch?v=8jQIKgTzQd4&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX)
+* [Denny Britz Reinforcement Learning](https://github.com/dennybritz/reinforcement-learning)
 
-Key Algorithms
-A3C
-TRPO
-PPO
-ACER
-ACKTR
+Key Papers / Algorithms:
+[Asynchronous Advantage Actor Critic](https://arxiv.org/abs/1602.01783)
+[Actor Critic with Experience Replay]( )
+
 DDPG
 DDDDPG (ICLR)
 Generalized Advantage Estimation
 Benchmarking Continuous Control
 Towards Generalization and Simplicity in Continuous Control
+
+Natural Gradient Algorithms
+[Trust Region Policy Optimization]( )
+[Proximal Policy Optimization]()
+[Actor Critic with Kronecker Trust Regions]( )
+
 
 Value Learning / Q - Learning
 
@@ -111,4 +121,8 @@ Key Papers:
 There is a lot of new work in this area from the usual suspects (OpenAI, Berkeley, Deepmind). It is a really promising approach to use a simulator to train a policy and then transfer that policy to a real robot.
 
 
+## Heirarchical Reinforcement Learning
+Options framework
+Fuedal Networks
+Meta learning shared heirachies
 
