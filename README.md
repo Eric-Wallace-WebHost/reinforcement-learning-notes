@@ -18,7 +18,7 @@ Your gradient step tries to make actions that led to good results more common. A
 
 The high level view of the vanilla Policy Gradient Algorithm looks like the following.
 
-![Vanilla Policy Gradient Psuedo-Code/Algorithm](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/vanillaPG.png)
+[Vanilla Policy Gradient Psuedo-Code/Algorithm](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/vanillaPG.png)
 
 __Estimating the Advantage Function__:
 
@@ -34,7 +34,7 @@ Your neural network outputs V(s) and you estimate Q(s) either using n-step retur
 
 [Generalized Advantage Estimation (2016)](https://arxiv.org/abs/1506.02438) presents a better method to approximate the advantage function using an exponentially weighted average, similar to TD(lambda) 
 
-![The Adapted Algorithm](/images/a3c.png)
+[The Adapted Algorithm/Psuedo-Code](/images/a3c.png)
 
 __Continuous Control__:
 
@@ -96,8 +96,7 @@ __The Gradient Step__:
 
 Q-Learning is simply a regression problem, where the neural network attempts to predict the n-step (normally n = 1) return by taking that step. 
 
-![Gradient Step for Policy Gradients](/images/deepqlearning.png)
-
+[Psuedo-Code/Algorithm for Deep Q-Learning](/images/dqn.png)
 
 __Algorithmic Improvements__:
 
