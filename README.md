@@ -5,6 +5,7 @@ A general class of algorithms that makes no attempt to learn the underlying dyna
 Directly optimize the policy by analytically computing the gradient using the "REINFORCE" or likelihood ratio trick. These algorithms are extremely well suited for learning continuous control tasks such as the MuJoCo simulator. They sometimes have worse sample complexity than Q-Learning algorithms as it is difficult to learn off-policy in policy gradient techniques.
 
 Learning Resources:
+* [http://karpathy.github.io/2016/05/31/rl/](Very Simple, fantastic explanation of policy gradient)
 * [Berkeley Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures)
 * [David Silver Lecture 7](https://www.youtube.com/watch?v=KHZVXao4qXs&t=15s)
 * [Berkeley Deep RL Course](https://www.youtube.com/watch?v=8jQIKgTzQd4&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX)
@@ -16,7 +17,7 @@ Key Papers / Algorithms:
 
 DDPG
 DDDDPG (ICLR)
-Generalized Advantage Estimation
+[Generalized Advantage Estimation (2016)](https://arxiv.org/abs/1506.02438) presents a better method to approximate the advantage function using an exponentially weighted average, similar to TD(lambda) 
 Benchmarking Continuous Control
 Towards Generalization and Simplicity in Continuous Control
 
