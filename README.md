@@ -76,11 +76,11 @@ _TODO_: There is a lot of math I need to review/learn to understand these techni
 
 __Using Reinforce-Like Methods in NLP and Computer Vision__:
 
-When using non-differentiable blocks in other systems like "hard attention" models in Image Captioning, you can use Reinforce like algorithms to provide gradient information. John Schulman provided a generalized framework for computation graphs that involve "stochastic computation" like hard attention models. [Stochastic Computation Graphs](https://arxiv.org/abs/1506.05254)
+When using non-differentiable blocks in other systems like "hard attention" models in Image Captioning, you can use Reinforce like algorithms to provide gradient information. John Schulman provided a generalized framework for computation graphs that involve "stochastic computation" like hard attention models. [Stochastic Computation Graphs](https://arxiv.org/abs/1506.05254) is the paper, which I need to review as well as his slides from the Bootcamp/Course describing this. 
 
 
 Learning Resources:
-* [http://karpathy.github.io/2016/05/31/rl](Andrej Karpathy's Explanation) Very Simple, fantastic explanation of policy gradient. The key intuition is that the advantage A becomes your label if you think of this like a supervised learning problem.
+* [Andrej Karpathy's Explanation](http://karpathy.github.io/2016/05/31/rl) Very Simple, fantastic explanation of policy gradient. The key intuition is that the advantage A becomes your label if you think of this like a supervised learning problem.
 * [Berkeley Deep RL Bootcamp Lecture 4](https://sites.google.com/view/deep-rl-bootcamp/lectures)
 * [David Silver Lecture 7](https://www.youtube.com/watch?v=KHZVXao4qXs&t=15s)
 * [Berkeley Deep RL Course John Schulman Lectures](https://www.youtube.com/watch?v=8jQIKgTzQd4&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX)
