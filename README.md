@@ -4,7 +4,11 @@ A general class of algorithms that makes no attempt to learn the underlying dyna
 
 ## Policy Gradient Methods
 
-Directly optimize the policy by analytically computing the gradient using the "REINFORCE" or likelihood ratio trick. These algorithms are extremely well suited for learning continuous control tasks such as the MuJoCo simulator. They sometimes have worse sample complexity than Q-Learning algorithms as it is difficult to learn off-policy in policy gradient techniques.
+Directly optimize the policy by analytically computing the gradient using the "REINFORCE" or likelihood ratio trick. 
+
+In practice, these techniques using a neural network as an approximator for the policy, and follow an algorithm similar to Policy Iteration. They do a "policy evaluation" step where they compute rollouts in the environment to see how the current policy is doing. They then update the policy in order to get more of the good rewards it say.
+
+These algorithms are extremely well suited for learning continuous control tasks such as the MuJoCo simulator. They sometimes have worse sample complexity than Q-Learning algorithms as it is difficult to learn off-policy in policy gradient techniques.
 
 __The Gradient Step__:
 
@@ -62,13 +66,17 @@ There has been a lot of interest in algorithms that simulate a natural gradient 
 
 Now in supervised learning, the general trend has been to do more "dumb steps" rather than less "smart steps". Don't worry about computing the Hessian, doing L-BFGS, doing any second order information. Hell, you don't even need fresh gradients in an asynchronous setting as noise can be a great regularizer. But in Reinforcement Learning, we have a lot more issues. First off, we want to be more sample efficient. Secondly, and much more importantly, is that in Reinforcement Learning changes to our policy will change the data we see in the future. If we take a step that is too big, we can destroy everything we have learned in the worst case. That is the motivation behind the name "Trust Regions", we want to stay in the regions of the RL problem that we have explored a lot and trust our network in those areas.
 
-There is a lot of math I need to review/learn to understand these techniques. I will leave them here for the future to explore the details and not just the intuition.
+_TODO_: There is a lot of math I need to review/learn to understand these techniques. I will leave them here for the future to explore the details and not just the intuition.
 
 [Trust Region Policy Optimization](https://arxiv.org/abs/1502.05477) The described work, solves the KL-divergence constrained optimization problem.
 
 [Proximal Policy Optimization](https://arxiv.org/abs/1707.06347) Solves the constrained KL-divergence problem, that is, it adds a penalty for divering the policy too much. The "clipped" objective of the paper is very simple and provides great results in practice (about equal to TRPO) for much less computation time and algorithmic complexity.
 
 [Actor Critic with Kronecker Trust Regions](https://arxiv.org/pdf/1708.05144.pdf) Provides an approximate solution to TRPO using Kronecker Trust Regions which is basically superior in every way to TRPO. Reaches great results and provides only small overhead on top of A2C. Interesting they use the n-step return for the advantage estimation instead of Generalized Advantage Estimation which I do think hurts their performance a bit. They should have added this and tuned the lambda parameter.
+
+__Using Reinforce-Like Methods in NLP and Computer Vision__:
+
+When using non-differentiable blocks in other systems like "hard attention" models in Image Captioning, you can use Reinforce like algorithms to provide gradient information. John Schulman provided a generalized framework for computation graphs that involve "stochastic computation" like hard attention models. [Stochastic Computation Graphs](https://arxiv.org/abs/1506.05254)
 
 
 Learning Resources:
@@ -78,23 +86,56 @@ Learning Resources:
 * [Berkeley Deep RL Course John Schulman Lectures](https://www.youtube.com/watch?v=8jQIKgTzQd4&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX)
 
 
-Value Learning / Q - Learning
+## Value Learning / Q - Learning
 
-Key Algorithms
-DQN
-Double DQN
-Dueling DQN
-Distrubtional DQN (new updated paper a few days ago)
-Noisy Nets
-Prioritized Experience Replay
-Rainbow (combines all of them)
+This class of algorithm is a generalization of the Value Iteration algorithm. Runs the current policy to collect information about the Q-Values of the various states. The policy is implicit, you simply select the best Q value in each state. 
 
+In practice, these can be more sample efficient that policy gradient methods because you can learn off-policy. That is, rather than using SARSA-like algorithms, Q-Learning is used in practice. This gives the advantage that we can use an experience replay and train our neural network completely off policy. The one disadvantage of Q-Learning is that you can't easily use eligibility traces as is done in SARSA(lambda). Thats why the original DQN paper simply used the one-step Q estimate to train. This has disadvantages because the reward don't directly flow backwards through the states. Though this can be overcome by using n-step returns in the forward view as is done in Rainbow.
+
+__The Gradient Step__:
+
+Q-Learning is simply a regression problem, where the neural network attempts to predict the n-step (normally n = 1) return by taking that step. 
+
+![Gradient Step for Policy Gradients](/images/deepqlearning.png)
+
+
+__Algorithmic Improvements__:
+
+There has been a whole host of improvements to Deep Q-learning. Many of these algorithms provide orthogonal improvements to one another. They have been combined in the Rainbow paper. 
+
+[Deep Q Networks Original Paper (Nature Version)](http://www.davidqiu.com:8888/research/nature14236.pdf) The paper that started it all.
+
+[Double Reinforcement Learning with Double Q-Learning](https://arxiv.org/abs/1509.06461) describes using theoretical and empirical results that because Q-Learning takes the max of Q over a series of states, it can have a large over estimation of the Q value. They show that this is harmful to learning and propose a very slight tweak to the network target in the gradient step equation. This provides good results, adds no computation time, and is probably a few lines of code change (aka it should definitely be used!).
+
+[Dueling Network Architectures for Deep Reinforcement Learning](https://arxiv.org/abs/1511.06581) describes a way to structure your neural network architecture to implicility model the Q value as (V(s) + A(s)). This has nice properties as you can implicility model the Value function even though you are training for Q values. This doesn't require any obvious algorithmic changes, but you need to change you network structure to have two heads. You need to combine those two heads using a network they describe in the paper. 
+
+[Prioritized Experience Replay](https://arxiv.org/abs/1511.05952) is an idea that fixes the naive uniform random sampling from the experience replay used in DQN. The paper talks at length at how you can make this more efficient, because otherwise you will have to do computation and search over all elements in the experience replay (~ 1,000,000 elements) which will be super expensive for every step in the network. They use some nice ideas like KD trees to do this.  
+
+N-Step Q-Learning doesn't have a paper as it is a very idea but it is used in the Rainbow paper. Due to the fact that we are using e-greedy Q-Learning and learning off-policy, we can't easily use eligibility traces. You can get around this and doing Q(lambda) by doing something like keep track of whenever you acted randomly, and stop updating the rewards at that point. This can be quite awkward though. A simple idea is just use an n-step target for the update. This is also a little awkward as the first state will have n-steps of reward to approximate and the final non-terminal state will just have a 1-step target, but that is okay. This should get nice gains by reducing variance, especially early in the training phase.
+
+[Rainbow: Combining improvements in Deep Reinforcement Learning](https://arxiv.org/abs/1710.02298) combines all of the above techniques and the distributional c-51 algorithm below into one algorithm that does super well.
+
+__Distributional Bellman Equations__:
+
+The intuition behind distributional Q-Learning is that rather than outputting the expected value of Q (i.e. a single scalar), we should output a distribution of Q values (in practice this is a bucketed distribution, like output 51 probability buckets of Q values). This has the advantage of being able to estimate multi-modal or skewed distributions where we might want to act differently than just the expected Q-Value.
+
+_TODO_: I still need to go through these papers and perhaps read the older literature to get the math working out.
+
+[A Distributional Perspective on Reinforcement Learning](https://arxiv.org/pdf/1707.06887.pdf) is the original paper to propose this method in Deep Reinforcement Learning. 
+
+[Distributional Reinforcement Learning with Quantile Regression](https://arxiv.org/pdf/1710.10044.pdf) is an improvement to the above paper. 
+
+__Parallel Training of Reinforcement Learning__:
+
+Gorilla
+Apex???
 
 __Exploration in Value-Learning__:
 
 E-greedy remains the dominant technique. It is very simple and has sublinear regret in the contextual bandit setting (see David Silver's Lecture 9 for more information on this).
 
 The parameter noise paper (above in Policy Gradient Exploration section) also shows really nice. A combination of a small bit of E-greedy and small bit of parameter space noise also might be a nice way to explore.
+
 
 
 
