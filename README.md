@@ -14,11 +14,11 @@ __The Gradient Step__:
 
 Your gradient step tries to make actions that led to good results more common. Andrej Karpathy provides a great analogy to supervised learning.
 
-![Gradient Step for Policy Gradients](/images/gae.png)
+[Gradient Step for Policy Gradients](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/gae.png)
 
 The high level view of the vanilla Policy Gradient Algorithm looks like the following.
 
-![Vanilla Policy Gradient](/images/vanillaPG.png)
+![Vanilla Policy Gradient Psuedo-Code/Algorithm](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/vanillaPG.png)
 
 __Estimating the Advantage Function__:
 
