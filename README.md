@@ -80,7 +80,7 @@ When using non-differentiable blocks in other systems like "hard attention" mode
 
 
 Learning Resources:
-* [http://karpathy.github.io/2016/05/31/rl/](Andrej Karpathy's Explanation) Very Simple, fantastic explanation of policy gradient. The key intuition is that the advantage A becomes your label if you think of this like a supervised learning problem.
+* [http://karpathy.github.io/2016/05/31/rl](Andrej Karpathy's Explanation) Very Simple, fantastic explanation of policy gradient. The key intuition is that the advantage A becomes your label if you think of this like a supervised learning problem.
 * [Berkeley Deep RL Bootcamp Lecture 4](https://sites.google.com/view/deep-rl-bootcamp/lectures)
 * [David Silver Lecture 7](https://www.youtube.com/watch?v=KHZVXao4qXs&t=15s)
 * [Berkeley Deep RL Course John Schulman Lectures](https://www.youtube.com/watch?v=8jQIKgTzQd4&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX)
