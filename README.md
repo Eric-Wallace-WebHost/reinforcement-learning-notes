@@ -4,20 +4,42 @@ A general class of algorithms that makes no attempt to learn the underlying dyna
 ## Policy Gradient Methods
 Directly optimize the policy by analytically computing the gradient using the "REINFORCE" or likelihood ratio trick. These algorithms are extremely well suited for learning continuous control tasks such as the MuJoCo simulator. They sometimes have worse sample complexity than Q-Learning algorithms as it is difficult to learn off-policy in policy gradient techniques.
 
-Learning Resources:
-* [http://karpathy.github.io/2016/05/31/rl/](Very Simple, fantastic explanation of policy gradient)
-* [Berkeley Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures)
-* [David Silver Lecture 7](https://www.youtube.com/watch?v=KHZVXao4qXs&t=15s)
-* [Berkeley Deep RL Course](https://www.youtube.com/watch?v=8jQIKgTzQd4&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX)
-* [Denny Britz Reinforcement Learning](https://github.com/dennybritz/reinforcement-learning)
+__The Gradient Step__:
 
-Key Papers / Algorithms:
-[Asynchronous Advantage Actor Critic](https://arxiv.org/abs/1602.01783)
-[Actor Critic with Experience Replay]( )
+Your gradient step is 
 
-DDPG
-DDDDPG (ICLR)
+__Estimating the Advantage Function__:
+
+To get a good estimate of the advantage function, this is what is done in practice. 
+
+Your neural network outputs V(s) and you estimate Q(s) either using n-step returns or Generalized Advantage Estimation (exponentially weighted returns just like TD(lambda)). 
+
+![GitHub Logo](/images/something.png)
+Format: ![Alt Text](url)
+
+
+![GitHub Logo](/images/something.png)
+Format: ![Alt Text](url)
+
+[Asynchronous Advantage Actor Critic](https://arxiv.org/abs/1602.01783) Use n-step returns and a neural network to approximate the advantage function. Use shared convolutional weights for the policy network. Train using parallel workers and get really good results.
+
 [Generalized Advantage Estimation (2016)](https://arxiv.org/abs/1506.02438) presents a better method to approximate the advantage function using an exponentially weighted average, similar to TD(lambda) 
+
+__Continuous Control__:
+[Deep Deterministic Policy Gradient](https://arxiv.org/abs/1509.02971) Rather than outputting a probability distribution like a Guassian + Variance term, they have a deterministic policy. They then get gradient information directly from the critic instead of from the policy.
+
+
+__Other Ideas__:
+[Sample-Efficient Actor Critic with Experience Replay](https://arxiv.org/abs/1611.01224) Describes a method to adding an experience replay and off-policy learning to actor critic algorithms. They do this through a truncated importance sampling technique that allows you to learn off policy. They also present some interesting things like using an average of past policies as an approximation to TRPO. Though I think that last point is unneccesary when you have ACTKR or PPO.
+
+__Exploration in Policy Gradients__:
+The A3C paper (above) adds an entropy term that helps to encourage exploration. In a theoretical sense this term should try to make the policy more uniform (uniform distribution is maximum entropy). I haven't seen this used very often though, and the other techniques (simply adding noise) are simpler and show good results. A mix of the two techniques with low settings on their parameters also might be a promising technique. Entropy is a "state-space" exploration technique because it encourages the network to randomly explore around.  
+
+[Noisy Networks for Exploration](https://arxiv.org/abs/1706.10295) also seen in OpenAI paper which has similar idea. It basically just adds random noise to your policy to help explore more. In Value-Learning e-greedy techniques do "state-space exploration", where this techniques is a "parameter space exploration" technique.
+
+
+
+DDDDPG (ICLR)
 Benchmarking Continuous Control
 Towards Generalization and Simplicity in Continuous Control
 
@@ -25,6 +47,15 @@ Natural Gradient Algorithms
 [Trust Region Policy Optimization]( )
 [Proximal Policy Optimization]()
 [Actor Critic with Kronecker Trust Regions]( )
+
+
+
+
+Learning Resources:
+* [http://karpathy.github.io/2016/05/31/rl/](Andrej Karpathy's Explanation) Very Simple, fantastic explanation of policy gradient. The key intuition is that the advantage A becomes your label if you think of this like a supervised learning problem.
+* [Berkeley Deep RL Bootcamp Lecture 4](https://sites.google.com/view/deep-rl-bootcamp/lectures)
+* [David Silver Lecture 7](https://www.youtube.com/watch?v=KHZVXao4qXs&t=15s)
+* [Berkeley Deep RL Course John Schulman Lectures](https://www.youtube.com/watch?v=8jQIKgTzQd4&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX)
 
 
 Value Learning / Q - Learning
@@ -39,10 +70,19 @@ Prioritized Experience Replay
 Rainbow (combines all of them)
 
 
+__Exploration in Value-Learning__:
+E-greedy remains the dominant technique. It is very simple and has sublinear regret in the contextual bandit setting (see David Silver's Lecture 9 for more information on this).
+
+The parameter noise paper (above in Policy Gradient Exploration section) also shows really nice. A combination of a small bit of E-greedy and small bit of parameter space noise also might be a nice way to explore.
+
+
+
 Other ideas
 
 UNREAL
 Nueral Episodic Control
+
+
 
 
 # Imitation Learning / Behavorial Cloning
@@ -53,6 +93,8 @@ Can be surprisingly succesful given how simple it is to use in practice. For exa
 One of the major practical issues is that of compounding errors. When the classifier makes a mistake and begins to see a trajectory and/or states that is hasn't seen in training, all bets are off whether it will work correctly. We hope (as is usual in deep networks), that the network can generalize over the input manifold to areas that is has never seen before, but we know in practice this is rarely the case.
 
 Dataset Aggregation Algorithm (DAgger) is a simple online learning algorithm that looks to iteratively combat the compounding errors issue. You train on the dataset. Then run your policy at test time and record your observations. Then have a human label the observations with the correct state. In one sense, this is supposed to teach your algorithm how to correct itself when it makes errors.
+
+[DART](http://bair.berkeley.edu/blog/2017/10/26/dart/) is a technique from berkeley to help do imitation learning by adding noise to the demonstrations. 
 
 Learning References:
 * [Berkeley Deep RL Course Lecture 2](https://www.youtube.com/watch?v=kl_G95uKTHw&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX&index=2) discusses imitation learning, DAgger, and other techniques. Has links to papers and case studies
