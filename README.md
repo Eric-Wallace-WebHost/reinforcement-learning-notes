@@ -43,23 +43,32 @@ of from the policy.
 
 
 __Other Ideas__:
+
 [Sample-Efficient Actor Critic with Experience Replay](https://arxiv.org/abs/1611.01224) Describes a method to adding an experience replay and off-policy learning to actor critic algorithms. They do this through a truncated importance sampling technique that allows you to learn off policy. They also present some interesting things like using an average of past policies as an approximation to TRPO. Though I think that last point is unneccesary when you have ACTKR or PPO.
 
 __Exploration in Policy Gradients__:
+
 The A3C paper (above) adds an entropy term that helps to encourage exploration. In a theoretical sense this term should try to make the policy more uniform (uniform distribution is maximum entropy). I haven't seen this used very often though, and the other techniques (simply adding noise) are simpler and show good results. A mix of the two techniques with low settings on their parameters also might be a promising technique. Entropy is a "state-space" exploration technique because it encourages the network to randomly explore around.  
 
 [Noisy Networks for Exploration](https://arxiv.org/abs/1706.10295) also seen in OpenAI paper which has similar idea. It basically just adds random noise to your policy to help explore more. In Value-Learning e-greedy techniques do "state-space exploration", where this techniques is a "parameter space exploration" technique.
 
 
-
 DDDDPG (ICLR)
 
-Natural Gradient Algorithms
-[Trust Region Policy Optimization]( )
-[Proximal Policy Optimization]()
-[Actor Critic with Kronecker Trust Regions]( )
 
+__Natural Gradient Algorithms__:
 
+There has been a lot of interest in algorithms that simulate a natural gradient step. The main intuition behind these optimization methods in general is that rather than taking a step in parameter space, take a step in function space. [This blog post](http://kvfrans.com/what-is-the-natural-gradient-and-where-does-it-appear-in-trust-region-policy-optimization/) provides a fantastic intuitive explanation. 
+
+Now in supervised learning, the general trend has been to do more "dumb steps" rather than less "smart steps". Don't worry about computing the Hessian, doing L-BFGS, doing any second order information. Hell, you don't even need fresh gradients in an asynchronous setting as noise can be a great regularizer. But in Reinforcement Learning, we have a lot more issues. First off, we want to be more sample efficient. Secondly, and much more importantly, is that in Reinforcement Learning changes to our policy will change the data we see in the future. If we take a step that is too big, we can destroy everything we have learned in the worst case. That is the motivation behind the name "Trust Regions", we want to stay in the regions of the RL problem that we have explored a lot and trust our network in those areas.
+
+There is a lot of math I need to review/learn to understand these techniques. I will leave them here for the future to explore the details and not just the intuition.
+
+[Trust Region Policy Optimization](https://arxiv.org/abs/1502.05477) The described work, solves the KL-divergence constrained optimization problem.
+
+[Proximal Policy Optimization](https://arxiv.org/abs/1707.06347) Solves the constrained KL-divergence problem, that is, it adds a penalty for divering the policy too much. The "clipped" objective of the paper is very simple and provides great results in practice (about equal to TRPO) for much less computation time and algorithmic complexity.
+
+[Actor Critic with Kronecker Trust Regions](https://arxiv.org/pdf/1708.05144.pdf) Provides an approximate solution to TRPO using Kronecker Trust Regions which is basically superior in every way to TRPO. Reaches great results and provides only small overhead on top of A2C. Interesting they use the n-step return for the advantage estimation instead of Generalized Advantage Estimation which I do think hurts their performance a bit. They should have added this and tuned the lambda parameter.
 
 
 Learning Resources:
