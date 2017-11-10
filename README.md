@@ -1,12 +1,20 @@
 # Model Free Reinforcement Learning
+
 A general class of algorithms that makes no attempt to learn the underlying dynamics of the system, nor do any planning in the future. This can cause large sample inefficiencies, but in practice these algorithms currently learn the best policies out of all classes of algorithms.
 
 ## Policy Gradient Methods
+
 Directly optimize the policy by analytically computing the gradient using the "REINFORCE" or likelihood ratio trick. These algorithms are extremely well suited for learning continuous control tasks such as the MuJoCo simulator. They sometimes have worse sample complexity than Q-Learning algorithms as it is difficult to learn off-policy in policy gradient techniques.
 
 __The Gradient Step__:
 
-Your gradient step is 
+Your gradient step tries to make actions that led to good results more common. Andrej Karpathy provides a great analogy to supervised learning.
+
+![Gradient Step for Policy Gradients](/images/gae.png)
+
+The high level view of the vanilla Policy Gradient Algorithm looks like the following.
+
+![Vanilla Policy Gradient](/images/vanillaPG.png)
 
 __Estimating the Advantage Function__:
 
@@ -14,19 +22,24 @@ To get a good estimate of the advantage function, this is what is done in practi
 
 Your neural network outputs V(s) and you estimate Q(s) either using n-step returns or Generalized Advantage Estimation (exponentially weighted returns just like TD(lambda)). 
 
-![GitHub Logo](/images/something.png)
-Format: ![Alt Text](url)
+![Generalized Advantage Estimation](/images/GAE.png)
 
-
-![GitHub Logo](/images/something.png)
-Format: ![Alt Text](url)
+![N-Step Return](/images/nstepreturn.png)
 
 [Asynchronous Advantage Actor Critic](https://arxiv.org/abs/1602.01783) Use n-step returns and a neural network to approximate the advantage function. Use shared convolutional weights for the policy network. Train using parallel workers and get really good results.
 
 [Generalized Advantage Estimation (2016)](https://arxiv.org/abs/1506.02438) presents a better method to approximate the advantage function using an exponentially weighted average, similar to TD(lambda) 
 
+![The Adapted Algorithm](/images/a3c.png)
+
 __Continuous Control__:
-[Deep Deterministic Policy Gradient](https://arxiv.org/abs/1509.02971) Rather than outputting a probability distribution like a Guassian + Variance term, they have a deterministic policy. They then get gradient information directly from the critic instead of from the policy.
+
+[Deep Deterministic Policy Gradient](https://arxiv.org/abs/1509.02971) Rather than outputting a probability distribution like a Guassian + Variance term, they have a deterministic policy. They then get gradient information directly from the critic instead 
+of from the policy.
+
+[Benchmarking Continuous Control](https://arxiv.org/abs/1604.06778) Provides a fantastic survey and benchmarking of different algorithms. It does not include PPO or ACKTR as it is from 2016. 
+
+[Towards Generalization and Simplicity in Continuous Control](https://arxiv.org/abs/1703.02660) A bit of a provactative paper showing that linear and RBF policies are competitive on a lot of tasks.
 
 
 __Other Ideas__:
@@ -40,8 +53,6 @@ The A3C paper (above) adds an entropy term that helps to encourage exploration. 
 
 
 DDDDPG (ICLR)
-Benchmarking Continuous Control
-Towards Generalization and Simplicity in Continuous Control
 
 Natural Gradient Algorithms
 [Trust Region Policy Optimization]( )
@@ -71,6 +82,7 @@ Rainbow (combines all of them)
 
 
 __Exploration in Value-Learning__:
+
 E-greedy remains the dominant technique. It is very simple and has sublinear regret in the contextual bandit setting (see David Silver's Lecture 9 for more information on this).
 
 The parameter noise paper (above in Policy Gradient Exploration section) also shows really nice. A combination of a small bit of E-greedy and small bit of parameter space noise also might be a nice way to explore.
