@@ -126,3 +126,4 @@ Options framework
 Fuedal Networks
 Meta learning shared heirachies
 
+## Inverse Reinforcement Learning
