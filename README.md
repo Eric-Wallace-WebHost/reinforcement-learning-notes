@@ -127,8 +127,7 @@ _TODO_: I still need to go through these papers and perhaps read the older liter
 
 __Parallel Training of Reinforcement Learning__:
 
-Gorilla
-Apex???
+[Gorila](https://arxiv.org/pdf/1507.04296.pdf) demonstrates training the DQN algorithm in a distributed computation setting across many parallel workers. It uses a shared parameter server as is common in the Google Brain research work. It shows nice speed ups and good results.
 
 __Exploration in Value-Learning__:
 
@@ -137,14 +136,13 @@ E-greedy remains the dominant technique. It is very simple and has sublinear reg
 The parameter noise paper (above in Policy Gradient Exploration section) also shows really nice. A combination of a small bit of E-greedy and small bit of parameter space noise also might be a nice way to explore.
 
 
+__Aditional Exploratory Work__:
 
+[Reinforcement Learning with Unsupervised Auxiliary Tasks (UNREAL)](https://arxiv.org/abs/1611.05397) adds auxiliary tasks to a reinforcement learning agent such as pixel control. The agent reuses some of the neural network architecture for these auxiliary tasks, so it can help to do stuff like do additional training of convolutional layers. 
 
-Other ideas
+I wonder if anyone has tried to do pretraining of convolution layers. Say do object detection on another tasks like ImageNet, then transfer the lower layers to your agent and initialize them from there.
 
-UNREAL
-Nueral Episodic Control
-
-
+[Neural Episodic Control](https://arxiv.org/abs/1703.01988) uses the same ideas you would see in a memory-augmented LSTM like "Differentiable Neural Computer" or "End to End Memory Networks". Rather than storing the Q-Values in the network parameters, the convolution layers produce a vector that is used to read/write from a memory that stores the Q-Values. It learns very fast but doesn't each as high performance as other networks over many episodes.
 
 
 # Imitation Learning / Behavorial Cloning
