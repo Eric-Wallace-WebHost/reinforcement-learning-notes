@@ -26,9 +26,9 @@ To get a good estimate of the advantage function, this is what is done in practi
 
 Your neural network outputs V(s) and you estimate Q(s) either using n-step returns or Generalized Advantage Estimation (exponentially weighted returns just like TD(lambda)). 
 
-![Generalized Advantage Estimation](/images/GAE.png)
+[Slide showing Generalized Advantage Estimation](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/GAE.png)
 
-![N-Step Return](/images/nstepreturn.png)
+[Slide showing N-Step Return](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/nstepreturn.png)
 
 [Asynchronous Advantage Actor Critic](https://arxiv.org/abs/1602.01783) Use n-step returns and a neural network to approximate the advantage function. Use shared convolutional weights for the policy network. Train using parallel workers and get really good results.
 
