@@ -164,6 +164,10 @@ Key Papers:
 * [Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) Berkeley crew uses Virtual Reality Gear for Imitation Learning. They are now scaling this at their startup.
 
 # Model Based Reinforcement Learning
+
+_TODO_: 
+Everything below here I don't know well.
+
 At a high level, you use a model of the enviroment (continuous or discrete) to do some sort of planning or simulation in order to generate your policy. 
 
 This model can be given in the simple case (you know the MDP, or maybe you know physics, or you have a simulator or something) or in practice we more generally try to learn the model.
@@ -181,7 +185,8 @@ __TODO__: Finish writing this section after watching rest of Berkeley Lectures
 
 ## Planning Based Approaches (Discrete Domains)
 MCTS
-__TODO__: Finish writing this section after watching rest of Berkeley Lectures
+_TODO_: 
+Finish writing this section after watching rest of Berkeley Lectures
 
 ## Model Based & Model Free Combinations
 DYNA Algorithm
