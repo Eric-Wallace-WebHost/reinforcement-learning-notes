@@ -34,7 +34,8 @@ Your neural network outputs V(s) and you estimate Q(s) either using n-step retur
 
 [Generalized Advantage Estimation (2016)](https://arxiv.org/abs/1506.02438) presents a better method to approximate the advantage function using an exponentially weighted average, similar to TD(lambda) 
 
-[The Adapted Algorithm/Psuedo-Code](/images/a3c.png)
+[The Adapted Algorithm/Psuedo-Code](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/a3cClean.PNG)
+[Another image of Psuedo-Code](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/a3c.PNG)
 
 __Continuous Control__:
 
