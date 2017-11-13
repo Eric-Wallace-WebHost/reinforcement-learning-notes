@@ -38,7 +38,7 @@ Your neural network outputs V(s) and you estimate Q(s) either using n-step retur
 
 [Another image of Psuedo-Code](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/a3c.PNG)
 
-__Continuous Control__:
+__Continuous Control Focused__:
 
 [Deep Deterministic Policy Gradient](https://arxiv.org/abs/1509.02971) Rather than outputting a probability distribution like a Guassian + Variance term, they have a deterministic policy. They then get gradient information directly from the critic instead 
 of from the policy.
@@ -47,6 +47,7 @@ of from the policy.
 
 [Towards Generalization and Simplicity in Continuous Control](https://arxiv.org/abs/1703.02660) A bit of a provactative paper showing that linear and RBF policies are competitive on a lot of tasks.
 
+[Distributed Distributional Deep Deterministic Policy Gradients](https://openreview.net/pdf?id=SyZipzbCb) uses DDPG + distributional Bellman idea + distributed system from Ape-X (paper in parallel section) for continuous control tasks.
 
 __Other Ideas__:
 
@@ -126,9 +127,7 @@ _TODO_: I still need to go through these papers and perhaps read the older liter
 
 [Distributional Reinforcement Learning with Quantile Regression](https://arxiv.org/pdf/1710.10044.pdf) is an improvement to the above paper. 
 
-__Parallel Training of Reinforcement Learning__:
-
-[Gorila](https://arxiv.org/pdf/1507.04296.pdf) demonstrates training the DQN algorithm in a distributed computation setting across many parallel workers. It uses a shared parameter server as is common in the Google Brain research work. It shows nice speed ups and good results.
+[Distributed Distributional Deep Deterministic Policy Gradients](https://openreview.net/pdf?id=SyZipzbCb) uses DDPG + distributional Bellman idea + distributed system from Ape-X (paper in parallel section) for continuous control tasks.
 
 __Exploration in Value-Learning__:
 
@@ -146,7 +145,15 @@ I wonder if anyone has tried to do pretraining of convolution layers. Say do obj
 [Neural Episodic Control](https://arxiv.org/abs/1703.01988) uses the same ideas you would see in a memory-augmented LSTM like "Differentiable Neural Computer" or "End to End Memory Networks". Rather than storing the Q-Values in the network parameters, the convolution layers produce a vector that is used to read/write from a memory that stores the Q-Values. It learns very fast but doesn't each as high performance as other networks over many episodes.
 
 
-# Imitation Learning / Behavorial Cloning
+# Parallel Training of Reinforcement Learning:
+
+[Gorila](https://arxiv.org/pdf/1507.04296.pdf) demonstrates training the DQN algorithm in a distributed computation setting across many parallel workers. It uses a shared parameter server as is common in the Google Brain research work. It shows nice speed ups and good results.
+
+[Distributed Prioritized Experience Replay](https://openreview.net/pdf?id=H1Dy---0Z) gets amazing results. They have a bunch of workers that sample from the environment and store results in a central prioritized replay. One learner on a GPU samples from that replay and computes gradient updates. The workers refresh their parameters every now and then. They get to about double the median performance as Rainbow did using this method.
+
+[Distributed Distributional Deep Deterministic Policy Gradients](https://openreview.net/pdf?id=SyZipzbCb) uses DDPG + distributional Bellman idea + distributed system from Ape-X (paper directly above this) for continuous control tasks.
+
+# Imitation Learning / Behavorial Cloning / Learning from Demonstrations
 Simple approach to solving reinforcement learning problems. Just frame the problem completely as a supervised learning problem to predict the correct action given a dataset of human experience.
 
 Can be surprisingly succesful given how simple it is to use in practice. For example in self driving cars (see Nvidia example), they simple train a deep ConvNet with outputs being the actuators of the car. The disadvantages of this are of course you need very large datasets of human experience which can be hard to collect.
@@ -163,6 +170,8 @@ Learning References:
 Key Papers:
 * [End to End Learning for Self Driving Cars (Nvidia 2016)](https://arxiv.org/abs/1604.07316) Nvidia trains a self driving car using an end to end convolutional neural network. It is trained directly from human driving footage. They also do neat tricks with using three cameras that view the road from different angles (see berkeley course above for explanation)
 * [Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) Berkeley crew uses Virtual Reality Gear for Imitation Learning. They are now scaling this at their startup.
+
+
 
 # Model Based Reinforcement Learning
 
