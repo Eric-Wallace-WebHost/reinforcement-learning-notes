@@ -53,6 +53,8 @@ of from the policy.
 
 [Distributed Distributional Deep Deterministic Policy Gradients](https://openreview.net/pdf?id=SyZipzbCb) uses DDPG + distributional Bellman idea + distributed system from Ape-X (paper in parallel section) for continuous control tasks.
 
+[Continuous Deep Q-Learning with Model-based Acceleration](https://arxiv.org/abs/1603.00748) not a policy gradient method. Shows how to apply Deep Q Learning to Continuous Control Tasks.
+
 __Other Ideas__:
 
 [Sample-Efficient Actor Critic with Experience Replay](https://arxiv.org/abs/1611.01224) Describes a method to adding an experience replay and off-policy learning to actor critic algorithms. They do this through a truncated importance sampling technique that allows you to learn off policy. They also present some interesting things like using an average of past policies as an approximation to TRPO. Though I think that last point is unneccesary when you have ACTKR or PPO.
