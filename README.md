@@ -229,12 +229,23 @@ Key Papers:
 
 ## Multi-Agent Domains
 
-__TODO__: I don't know anything about this
+# Self Play
+AlphaGo Zero of course
+OpenAI Dota
 
+[Emergent Complexity via Multi-Agent Competition](https://arxiv.org/abs/1710.03748) shows that self play can learn really complex stuff
+
+[Opponent Modeling in Deep Reinforcement Learning](https://arxiv.org/abs/1609.05559) models the opponent by generating an additional feature vector from their actions. 
+
+# Cooperation Amongst Agents
+
+[Counterfactual Multi-Agent Policy Gradients](https://arxiv.org/abs/1705.08926) 
+[Multi-Agent Actor Critic](https://arxiv.org/abs/1706.02275)
+These two papers use actor critic with a centralized critic for mulit-agent domains
+
+[Learning to Learn with Opponent Learning Awareness (LOLA)](https://arxiv.org/abs/1709.04326) In a cooperative setting, accounts for the fact that the other agent is also learning
 
 Key Papers:
-* [Learning to Learn with Opponent Learning Awareness (LOLA)](https://arxiv.org/abs/1709.04326)
-* [Multi-Agent Actor Critic](https://arxiv.org/abs/1706.02275)
 
 ## Derivative Free Optimization
 A broad class of algorithms that consists of things like Genetic Algorithms, Evolutionary Algorithms, Evolutionary Search, and closely related others. Most of these algorithms are essentially random parameter search + heuristics. In the case when a derivative can be computed analytically (supervised learning, Q learning, policy gradients using reinforce trick), these algorithms are dumb because they don't move in that direction.
