@@ -1,3 +1,11 @@
+# Reading List
+
+[Sample-Efficient Actor Critic with Experience Replay](https://arxiv.org/abs/1611.01224) Describes a method to adding an experience replay and off-policy learning to actor critic algorithms. They do this through a truncated importance sampling technique that allows you to learn off policy. They also present some interesting things like using an average of past policies as an approximation to TRPO. Though I think that last point is unneccesary when you have ACTKR or PPO.
+
+See Phone Screenshot.
+
+
+
 This repository contains notes on a number of Reinforcement Learning papers and algorithms. The main focus is on Deep Reinforcement Learning with papers starting from 2013.
 
 The basics of Reinforcement Learning are highlighted briefly at the end of this. If you are new to the field, I recommend taking a look at David Silver's online course, as well as Berkeley's course on Deep RL.
