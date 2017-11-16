@@ -262,6 +262,7 @@ Key Papers:
 
 
 
+
 ## Sim2Real Transfer
 There is a lot of new work in this area from the usual suspects (OpenAI, Berkeley, Deepmind). It is a really promising approach to use a simulator to train a policy and then transfer that policy to a real robot.
 
@@ -272,3 +273,12 @@ Fuedal Networks
 Meta learning shared heirachies
 
 ## Inverse Reinforcement Learning
+
+## Meta Learning
+
+The general approach is to learn a policy that is good at learning in new environments. So "Meta" learning is that we are training an agent that is good at learning. 
+
+Popular Papers
+RL^2 -> Uses an RNN as the meta learner
+Model Agnostic Meta Learning -> Make your parameters so that they are a few gradients steps away from a good policy
+Simple Neural Attentive Meta learner -> Replaces RL^2 with a dilated convolution
