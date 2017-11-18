@@ -258,7 +258,7 @@ Learning References:
 
 Key Papers:
 [Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864)
-
+http://blog.otoro.net/2017/11/12/evolving-stable-strategies/
 
 
 
