@@ -269,6 +269,7 @@ There is a lot of new work in this area from the usual suspects (OpenAI, Berkele
 
 ## Heirarchical Reinforcement Learning
 Options framework
+Option Critic
 Fuedal Networks
 Meta learning shared heirachies
 
