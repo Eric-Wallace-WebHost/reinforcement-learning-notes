@@ -1,7 +1,4 @@
 # Reading List
-
-[Sample-Efficient Actor Critic with Experience Replay](https://arxiv.org/abs/1611.01224) Describes a method to adding an experience replay and off-policy learning to actor critic algorithms. They do this through a truncated importance sampling technique that allows you to learn off policy. They also present some interesting things like using an average of past policies as an approximation to TRPO. Though I think that last point is unneccesary when you have ACTKR or PPO.
-
 See Phone Screenshot.
 
 
@@ -153,6 +150,8 @@ The parameter noise paper (above in Policy Gradient Exploration section) also sh
 
 
 __Aditional Exploratory Work__:
+
+[Sample-Efficient Actor Critic with Experience Replay](https://arxiv.org/abs/1611.01224) Describes a method to adding an experience replay and off-policy learning to actor critic algorithms. They do this through a truncated importance sampling technique that allows you to learn off policy. They also present some interesting things like using an average of past policies as an approximation to TRPO. Though I think that last point is unneccesary when you have ACTKR or PPO.
 
 [Reinforcement Learning with Unsupervised Auxiliary Tasks (UNREAL)](https://arxiv.org/abs/1611.05397) adds auxiliary tasks to a reinforcement learning agent such as pixel control. The agent reuses some of the neural network architecture for these auxiliary tasks, so it can help to do stuff like do additional training of convolutional layers. 
 
