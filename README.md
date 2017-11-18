@@ -160,6 +160,7 @@ I wonder if anyone has tried to do pretraining of convolution layers. Say do obj
 
 [Neural Episodic Control](https://arxiv.org/abs/1703.01988) uses the same ideas you would see in a memory-augmented LSTM like "Differentiable Neural Computer" or "End to End Memory Networks". Rather than storing the Q-Values in the network parameters, the convolution layers produce a vector that is used to read/write from a memory that stores the Q-Values. It learns very fast but doesn't each as high performance as other networks over many episodes.
 
+[Hindsight Experience Replay](https://arxiv.org/abs/1707.01495) Use Q functions that also have a goal associated with them. Then, even when you make a mistake, you can get reward by changing the goal in hindsight and still getting reward.
 
 # Parallel Training of Reinforcement Learning:
 
@@ -224,8 +225,7 @@ Learning References:
 * [Lecture 9 of Berkeley Reinforcement Learning Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures) discusses LQR, MPC, and guided policy search.
 * [Lecture 8 of David Silver's Reinforcement Learning Course](https://www.youtube.com/watch?v=ItMutbeOHtc&index=8&list=PLzuuYNsE1EZAXYR4FJ75jcJseBmo4KQ9-) discusses learning models, DYNA, and MCTS
 
-Key Papers:
-
+Guided Policy Search
 
 
 
@@ -268,6 +268,9 @@ There is a lot of new work in this area from the usual suspects (OpenAI, Berkele
 
 
 ## Heirarchical Reinforcement Learning
+
+Most of the approaches here use a high level controller that selects which low level controller to do the job. 
+
 Options framework
 Option Critic
 Fuedal Networks
