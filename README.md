@@ -1,8 +1,3 @@
-# Reading List
-See Phone Screenshot.
-
-
-
 This repository contains notes on a number of Reinforcement Learning papers and algorithms. The main focus is on Deep Reinforcement Learning with papers starting from 2013.
 
 The basics of Reinforcement Learning are highlighted briefly at the end of this. If you are new to the field, I recommend taking a look at David Silver's online course, as well as Berkeley's course on Deep RL.
@@ -285,3 +280,5 @@ Popular Papers
 RL^2 -> Uses an RNN as the meta learner
 Model Agnostic Meta Learning -> Make your parameters so that they are a few gradients steps away from a good policy
 Simple Neural Attentive Meta learner -> Replaces RL^2 with a dilated convolution
+
+[One-Shot Visual Imitation Learning via Meta-Learning](http://proceedings.mlr.press/v78/finn17a/finn17a.pdf) they run numerous imitation learning tasks and then use MAML to find settings of the parameters that makes the network good at Imitation Learning. 
