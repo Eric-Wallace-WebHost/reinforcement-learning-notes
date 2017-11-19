@@ -256,14 +256,13 @@ Learning References:
 
 Key Papers:
 [Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864)
-http://blog.otoro.net/2017/11/12/evolving-stable-strategies/
-
-
+[Evolution Strategies Package and Blog Post](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/)
 
 ## Sim2Real Transfer
 Most of the exciting recent work has shown that your simulator does not need to be accurate, but rather, it needs to have a high degree of variability for things you want your model to be invariant to. For example, random lighting, colors, shapes, etc. will help your model generalize well. Recent work has shown that if you randomize the dynamics and/or visualize environment you can transfer to the real world with no real world training. 
 
 [Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World](https://arxiv.org/pdf/1703.06907.pdf) uses random changes to the environment for better generalization. Such as changes in lighting and colors.
+
 [Sim-to-Real Transfer of Robotic Control with Dynamics Randomization](https://arxiv.org/pdf/1710.06537.pdf) show how using randomization of the dynamics of the simulation can help. For example, the friction of the surface the object is on. They use an LSTM which is suppose to be able to use its memory to learn how the dynamics behaves to make decisions.
 
 ## Heirarchical Reinforcement Learning
