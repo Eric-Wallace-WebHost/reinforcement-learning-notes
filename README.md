@@ -265,6 +265,9 @@ Most of the exciting recent work has shown that your simulator does not need to 
 
 [Sim-to-Real Transfer of Robotic Control with Dynamics Randomization](https://arxiv.org/pdf/1710.06537.pdf) show how using randomization of the dynamics of the simulation can help. For example, the friction of the surface the object is on. They use an LSTM which is suppose to be able to use its memory to learn how the dynamics behaves to make decisions.
 
+[Asymmetric Actor Critic for Image-Based Robot Learning](https://arxiv.org/pdf/1710.06542.pdf) proposes a nice idea that since we are in a simulator, you can cheat and give the critic full state information. The actor won't get anything special, but the critic will. This allows you to train and learn a lot faster.
+
+
 ## Heirarchical Reinforcement Learning
 
 Most of the approaches here use a high level controller that selects which low level controller to do the job. 
