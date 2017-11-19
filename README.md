@@ -258,7 +258,9 @@ http://blog.otoro.net/2017/11/12/evolving-stable-strategies/
 
 
 ## Sim2Real Transfer
-There is a lot of new work in this area from the usual suspects (OpenAI, Berkeley, Deepmind). It is a really promising approach to use a simulator to train a policy and then transfer that policy to a real robot.
+Most of the exciting recent work has shown that your simulator does not need to be accurate, but rather, it needs to have a high degree of variability for things you want your model to be invariant to. For example, random lighting, colors, shapes, etc. will help your model generalize well. Recent work has shown that if you randomize the dynamics and/or visualize environment you can transfer to the real world with no real world training. 
+
+[Sim-to-Real Transfer of Robotic Control with Dynamics Randomization](https://arxiv.org/pdf/1710.06537.pdf) show how using randomization of the dynamics of the simulation can help. For example, 
 
 
 ## Heirarchical Reinforcement Learning
@@ -282,3 +284,8 @@ Model Agnostic Meta Learning -> Make your parameters so that they are a few grad
 Simple Neural Attentive Meta learner -> Replaces RL^2 with a dilated convolution
 
 [One-Shot Visual Imitation Learning via Meta-Learning](http://proceedings.mlr.press/v78/finn17a/finn17a.pdf) they run numerous imitation learning tasks and then use MAML to find settings of the parameters that makes the network good at Imitation Learning. 
+
+
+
+
+It seems like doing Imitation Learning via a VR system, and running meta learning to get good parameters, and then maybe using the learned model and fine tuning it in simulation could get some really nice results. The next steps would be how do you combine many learned policies into one system that can actually be intelligent. Heirarchies? Who knows.
