@@ -286,6 +286,8 @@ Meta learning shared heirachies
 
 ## Inverse Reinforcement Learning
 
+Alternative to Imitation Learning, where instead we try to learn the reward function from expert demonstrations. Once we have the reward function, we can then use more general Reinforcement Learning techniques to solve the problem.
+
 ## Meta Learning
 
 The general approach is to learn a policy that is good at learning in new environments. So "Meta" learning is that we are training an agent that is good at learning. 
