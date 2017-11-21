@@ -184,6 +184,13 @@ Key Papers:
 
 * [Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) This paper is really good. They use a VR headset to directly demonstrate how a robot should do things like grasping. It is able to learn directly from pixels to actions in only about 30 minutes or less of human demonstrations.
 
+__Third Person Imitation Learning__:
+Third person imitation learning is obviously a bold goal, and would have fantastic implications. Like perhaps a robot could just watch youtube all day at 10000x speed and then learn how to do everything. 
+
+The general approach people have tried is to learn some sort of embedding that is invariant to different viewpoints. For example, when you are from a third person or first person view of someone pouring water in a cup, the embedding space should be the same. Some techniques have used domain confusion to train a discriminator that attempts to classify whether the embedding space is from one view or another. Once the discriminator has been fooled, we have invariant embeddings. You can then try to match the third person imitator by making your first person attempt match their third person embedding.
+
+[Time-Contrastive Networks](https://arxiv.org/abs/1704.06888z) show some really strong results. They learn invariant embeddings by training on both first and third person video. They have a clever idea where they use a triplet loss, frames that happen at the same time step (i.e. water is about to exit a cup) from different angles must have the same embedding; frames from different time steps but the same angle must have different embeddings. Then have the robot uses the learned embedding and reinforcement learning to try to match the demonstration.
+
 # Model Based Reinforcement Learning
 
 _TODO_: 
