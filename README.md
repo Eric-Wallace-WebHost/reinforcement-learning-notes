@@ -277,12 +277,11 @@ Most of the exciting recent work has shown that your simulator does not need to 
 
 ## Heirarchical Reinforcement Learning
 
-Most of the approaches here use a high level controller that selects which low level controller to do the job. 
+Most of the approaches here use a high level controller that selects which low level controller to do the job. One famous approach is the options framework. The options are low level policies which run until some termination condition.   
 
-Options framework
-Option Critic
-Fuedal Networks
-Meta learning shared heirachies
+[Option Critic](https://arxiv.org/abs/1609.05140) framework selects low level option pieces from a high level policy.
+[Fuedal Networks](https://arxiv.org/abs/1703.01161) use a high level manager that issues goals to its workers. Depending on the goal, workers are selected and then they execute their sub-policy. The workers are trained for the reward and back propagated through using normal policy gradient methods. The high level manager is trained based on what the underlying workers did, not what the goal it sent was. It gets some really nice results and seems overall better and cleaner than option-critic.
+[Meta Learning Shared Heirachies](https://arxiv.org/abs/1710.09767) incorporates meta learning into heirarchical structure.
 
 ## Inverse Reinforcement Learning
 
