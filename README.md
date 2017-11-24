@@ -302,3 +302,10 @@ Simple Neural Attentive Meta learner -> Replaces RL^2 with a dilated convolution
 
 
 It seems like doing Imitation Learning via a VR system, and running meta learning to get good parameters, and then maybe using the learned model and fine tuning it in simulation could get some really nice results. The next steps would be how do you combine many learned policies into one system that can actually be intelligent. Heirarchies? Who knows.
+
+## Transfering Policies / Multi-Task Reinforcement Learning
+
+[Policy Distillation](https://arxiv.org/abs/1511.06295) trains a number of different agents for individual Atari games. Then they run each of the different agents for a while and collect an experience replay for each one. They then train a single agent that emulates the results of all of the individual agents. The single agent is basically able to do as well as all the individual agents.
+[Actor Mimic](https://arxiv.org/abs/1511.06342) is basically the exact same approach as policy distillation. 
+[Progressive Reinforcement Learning with Distillation for Multi-Skilled Motion Control](https://openreview.net/pdf?id=B13njo1R-) applies policy distillation to the continuous setting and adds a few additions.
+[Distral](http://papers.nips.cc/paper/7036-distral-robust-multitask-reinforcement-learning.pdf) they use the same idea as policy distillation, but it runs in a more online fashion and uses the distilled policy to help regularize the individual experts. 
