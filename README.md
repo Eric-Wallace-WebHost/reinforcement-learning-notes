@@ -83,13 +83,6 @@ __Using Reinforce-Like Methods in NLP and Computer Vision__:
 
 When using non-differentiable blocks in other systems like "hard attention" models in Image Captioning, you can use Reinforce like algorithms to provide gradient information. John Schulman provided a generalized framework for computation graphs that involve "stochastic computation" like hard attention models. [Stochastic Computation Graphs](https://arxiv.org/abs/1506.05254) is the paper, which I need to review as well as his slides from the Bootcamp/Course describing this. 
 
-Learning Resources:
-* [Andrej Karpathy's Explanation](http://karpathy.github.io/2016/05/31/rl) Very Simple, fantastic explanation of policy gradient. The key intuition is that the advantage A becomes your label if you think of this like a supervised learning problem.
-* [Berkeley Deep RL Bootcamp Lecture 4](https://sites.google.com/view/deep-rl-bootcamp/lectures)
-* [David Silver Lecture 7](https://www.youtube.com/watch?v=KHZVXao4qXs&t=15s)
-* [Berkeley Deep RL Course John Schulman Lectures](https://www.youtube.com/watch?v=8jQIKgTzQd4&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX)
-
-
 ## Value Learning / Q - Learning
 
 This class of algorithm is a generalization of the Value Iteration algorithm. Runs the current policy to collect information about the Q-Values of the various states. The policy is implicit, you simply select the best Q value in each state. 
@@ -313,3 +306,13 @@ It seems like doing Imitation Learning via a VR system, and running meta learnin
 [Actor Mimic](https://arxiv.org/abs/1511.06342) is basically the exact same approach as policy distillation. 
 [Progressive Reinforcement Learning with Distillation for Multi-Skilled Motion Control](https://openreview.net/pdf?id=B13njo1R-) applies policy distillation to the continuous setting and adds a few additions.
 [Distral](http://papers.nips.cc/paper/7036-distral-robust-multitask-reinforcement-learning.pdf) they use the same idea as policy distillation, but it runs in a more online fashion and uses the distilled policy to help regularize the individual experts. 
+
+
+## Learning Resources
+
+* [Andrej Karpathy's Explanation](http://karpathy.github.io/2016/05/31/rl) Very Simple, fantastic explanation of policy gradient. The key intuition is that the advantage A becomes your label if you think of this like a supervised learning problem.
+* [Berkeley Deep RL Bootcamp Lectures](https://sites.google.com/view/deep-rl-bootcamp/lectures)
+* [David Silver Lectures](https://www.youtube.com/watch?v=2pWv7GOvuf0&list=PL7-jPKtc4r78-wCZcQn5IqyuWhBZ8fOxT)
+* [John Schulman Lectures](https://www.youtube.com/watch?v=aUrX-rP_ss4)
+* [Berkeley Deep Reinforcement Learning Course](http://rll.berkeley.edu/deeprlcourse/)
+
