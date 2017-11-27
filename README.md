@@ -1,6 +1,6 @@
 This repository contains notes on a number of Reinforcement Learning papers and algorithms. The main focus is on Deep Reinforcement Learning with papers starting from 2013.
 
-The basics of Reinforcement Learning are highlighted briefly at the end of this. If you are new to the field, I recommend taking a look at David Silver's online course, as well as Berkeley's course on Deep RL.
+If you are new to the field, I recommend taking a look at David Silver's online course, as well as Berkeley's course on Deep RL.
 
 # Model Free Reinforcement Learning
 
@@ -67,17 +67,11 @@ The A3C paper (above) adds an entropy term that helps to encourage exploration. 
 
 [Noisy Networks for Exploration](https://arxiv.org/abs/1706.10295) also seen in OpenAI paper which has similar idea. It basically just adds random noise to your policy to help explore more. In Value-Learning e-greedy techniques do "state-space exploration", where this techniques is a "parameter space exploration" technique.
 
-
-DDDDPG (ICLR)
-
-
 __Natural Gradient Algorithms__:
 
 There has been a lot of interest in algorithms that simulate a natural gradient step. The main intuition behind these optimization methods in general is that rather than taking a step in parameter space, take a step in function space. [This blog post](http://kvfrans.com/what-is-the-natural-gradient-and-where-does-it-appear-in-trust-region-policy-optimization/) provides a fantastic intuitive explanation. 
 
 Now in supervised learning, the general trend has been to do more "dumb steps" rather than less "smart steps". Don't worry about computing the Hessian, doing L-BFGS, doing any second order information. Hell, you don't even need fresh gradients in an asynchronous setting as noise can be a great regularizer. But in Reinforcement Learning, we have a lot more issues. First off, we want to be more sample efficient. Secondly, and much more importantly, is that in Reinforcement Learning changes to our policy will change the data we see in the future. If we take a step that is too big, we can destroy everything we have learned in the worst case. That is the motivation behind the name "Trust Regions", we want to stay in the regions of the RL problem that we have explored a lot and trust our network in those areas.
-
-_TODO_: There is a lot of math I need to review/learn to understand these techniques. I will leave them here for the future to explore the details and not just the intuition.
 
 [Trust Region Policy Optimization](https://arxiv.org/abs/1502.05477) The described work, solves the KL-divergence constrained optimization problem.
 
@@ -88,7 +82,6 @@ _TODO_: There is a lot of math I need to review/learn to understand these techni
 __Using Reinforce-Like Methods in NLP and Computer Vision__:
 
 When using non-differentiable blocks in other systems like "hard attention" models in Image Captioning, you can use Reinforce like algorithms to provide gradient information. John Schulman provided a generalized framework for computation graphs that involve "stochastic computation" like hard attention models. [Stochastic Computation Graphs](https://arxiv.org/abs/1506.05254) is the paper, which I need to review as well as his slides from the Bootcamp/Course describing this. 
-
 
 Learning Resources:
 * [Andrej Karpathy's Explanation](http://karpathy.github.io/2016/05/31/rl) Very Simple, fantastic explanation of policy gradient. The key intuition is that the advantage A becomes your label if you think of this like a supervised learning problem.
@@ -125,6 +118,8 @@ N-Step Q-Learning doesn't have a paper as it is a very idea but it is used in th
 
 [Rainbow: Combining improvements in Deep Reinforcement Learning](https://arxiv.org/abs/1710.02298) combines all of the above techniques and the distributional c-51 algorithm below into one algorithm that does super well.
 
+[Prioritized Distributed Experience Replay](https://openreview.net/forum?id=H1Dy---0Z&noteId=H1Dy---0Z) uses some of the improvements to Rainbow in a distributed manner. There are a ton of workers who collect rollouts (each with different e-greedy values), and then one learner on a GPU who does minibatches on a massive experience replay shared amongst all the workers. The learner samples in a prioritized way according to the absolute bellman error. It does really well. You could imagine this + distributional bellman just crushing it.
+
 __Distributional Bellman Equations__:
 
 The intuition behind distributional Q-Learning is that rather than outputting the expected value of Q (i.e. a single scalar), we should output a distribution of Q values (in practice this is a bucketed distribution, like output 51 probability buckets of Q values). This has the advantage of being able to estimate multi-modal or skewed distributions where we might want to act differently than just the expected Q-Value.
@@ -139,7 +134,17 @@ _TODO_: I still need to go through these papers and perhaps read the older liter
 
 __Exploration in Value-Learning__:
 
+_State Space Exploration_:
+
 E-greedy remains the dominant technique. It is very simple and has sublinear regret in the contextual bandit setting (see David Silver's Lecture 9 for more information on this).
+
+E-greedy
+Boltzmann Sampling
+[The Uncertainty Bellman Equation and Exploration](https://arxiv.org/abs/1709.05380) creates a new backup operator that expresses the agent's uncertainty about certain states. The agent is then rewarded for exploring the states it is uncertain about.
+Count Based Exploration
+Instrinsic Motivation
+
+_Parameter Space Exploration_:
 
 The parameter noise paper (above in Policy Gradient Exploration section) also shows really nice. A combination of a small bit of E-greedy and small bit of parameter space noise also might be a nice way to explore.
 
@@ -192,9 +197,6 @@ The general approach people have tried is to learn some sort of embedding that i
 [Time-Contrastive Networks](https://arxiv.org/abs/1704.06888z) show some really strong results. They learn invariant embeddings by training on both first and third person video. They have a clever idea where they use a triplet loss, frames that happen at the same time step (i.e. water is about to exit a cup) from different angles must have the same embedding; frames from different time steps but the same angle must have different embeddings. Then have the robot uses the learned embedding and reinforcement learning to try to match the demonstration.
 
 # Model Based Reinforcement Learning
-
-_TODO_: 
-Everything below here I don't know well.
 
 At a high level, you use a model of the enviroment (continuous or discrete) to do some sort of planning or simulation in order to generate your policy. 
 
