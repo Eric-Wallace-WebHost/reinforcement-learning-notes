@@ -258,6 +258,8 @@ These two papers use actor critic with a centralized critic for mulit-agent doma
 
 [Learning to Learn with Opponent Learning Awareness (LOLA)](https://arxiv.org/abs/1709.04326) In a cooperative setting, accounts for the fact that the other agent is also learning
 
+https://arxiv.org/pdf/1703.10069.pdf
+
 Key Papers:
 
 ## Derivative Free Optimization
