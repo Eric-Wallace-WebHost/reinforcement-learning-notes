@@ -115,6 +115,8 @@ N-Step Q-Learning doesn't have a paper as it is a very idea but it is used in th
 
 [Recurrent Q-Networks](https://arxiv.org/abs/1609.05521) uses an LSTM to model the Q-value. One of the central ideas is how do you use an experience replay, because the hidden state will be 0 when you start replaying when it wouldn't be 0 when your on policy. Some ideas are to store X frames (i.e. like 10) and then use the first 5 to warm up your LSTM, then only compute gradients for the last five. Another idea is to store the LSTM hidden state in the experience replay and initialize with that. But then you can't really compute graidents into that stored hidden state. You could finally just pretend it doesn't happen and intialize with all 0's and this paper tries that and it works fine (yay deep learning!!).
 
+[Pop-Art DQN](https://arxiv.org/pdf/1602.07714.pdf) applies an adaptive reward scaling algorithm to allow DQN to function with rewards of various scales (i.e. not clipped to -1, 1). 
+
 __Distributional Bellman Equations__:
 
 The intuition behind distributional Q-Learning is that rather than outputting the expected value of Q (i.e. a single scalar), we should output a distribution of Q values (in practice this is a bucketed distribution, like output 51 probability buckets of Q values). This has the advantage of being able to estimate multi-modal or skewed distributions where we might want to act differently than just the expected Q-Value.
@@ -138,6 +140,14 @@ Boltzmann Sampling
 [The Uncertainty Bellman Equation and Exploration](https://arxiv.org/abs/1709.05380) creates a new backup operator that expresses the agent's uncertainty about certain states. The agent is then rewarded for exploring the states it is uncertain about.
 Count Based Exploration
 Instrinsic Motivation
+
+https://arxiv.org/pdf/1709.05380.pdf
+
+https://arxiv.org/pdf/1606.01868.pdf
+Follow up work to ^ https://arxiv.org/abs/1703.01310
+
+https://arxiv.org/pdf/1602.04621.pdf
+
 
 _Parameter Space Exploration_:
 
