@@ -3,31 +3,28 @@ This repository contains notes on a number of Reinforcement Learning papers and 
 If you are new to the field, I recommend taking a look at David Silver's online course, as well as Berkeley's course on Deep RL.
 
 
-[Model-Free Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-free-reinforcement-learning)
+Table of contents
+=================
 
-[Policy Gradient Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#policy-gradient-methods)
-  
-[Value Learning Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#value-learning--q---learning)
- 
-[Parallel Training of Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#parallel-training-of-reinforcement-learning)
- 
-[Imitation Learning and Learning from Demonstrations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning--behavorial-cloning--learning-from-demonstrations)
-
-[Model-Based Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-based-reinforcement-learning)
-
-[Control Systems Based Approaches](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#control-systems-based-approaches-continuous-domains)
-
-[Discrete Planning Based Approaches](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#planning-based-approaches-discrete-domains)
-
-[Model Based and Model Free Combinations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-based--model-free-combinations)
-
-[Derivative Free Optimization](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#derivative-free-optimization)
-
-[Multi-Agent Domains](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#multi-agent-domains)
-
-[Self Play](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#self-play)
-
-[Cooperation Amongst Agents](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#cooperation-amongst-agents)
+* [Model-Free Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-free-reinforcement-learning)
+  * [Policy Gradient Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#policy-gradient-methods)  
+  * [Value Learning Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#value-learning--q---learning)
+* [Model-Based Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-based-reinforcement-learning)
+  * [Control Systems Based Approaches](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#control-systems-based-approaches-continuous-domains)
+  * [Discrete Planning Based Approaches](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#planning-based-approaches-discrete-domains)
+  * [Model Based and Model Free Combinations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-based--model-free-combinations)
+* [Derivative Free Optimization](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#derivative-free-optimization)
+* [Parallel Training of Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#parallel-training-of-reinforcement-learning) 
+* [Imitation Learning and Learning from Demonstrations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning--behavorial-cloning--learning-from-demonstrations)
+* [Multi-Agent Domains](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#multi-agent-domains)
+* [Self Play](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#self-play)
+* [Cooperation Amongst Agents](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#cooperation-amongst-agents)
+* [Sim2Real Transfer](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#sim2real-transfer)
+* [Heirarchical Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#heirarchical-reinforcement-learning)
+* [Inverse Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#inverse-reinforcement-learning)
+* [Meta Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#meta-learning)
+* [Transfering Policies / Multi-Task Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#transfering-policies--multi-task-reinforcement-learning)
+* Learning Resources
 
 
 # Model Free Reinforcement Learning
@@ -199,46 +196,6 @@ I wonder if anyone has tried to do pretraining of convolution layers. Say do obj
 
 [Hindsight Experience Replay](https://arxiv.org/abs/1707.01495) Use Q functions that also have a goal associated with them. Then, even when you make a mistake, you can get reward by changing the goal in hindsight and still getting reward.
 
-# Parallel Training of Reinforcement Learning:
-
-[Gorila](https://arxiv.org/pdf/1507.04296.pdf) demonstrates training the DQN algorithm in a distributed computation setting across many parallel workers. It uses a shared parameter server as is common in the Google Brain research work. It shows nice speed ups and good results.
-
-[Distributed Prioritized Experience Replay](https://openreview.net/pdf?id=H1Dy---0Z) gets amazing results. They have a bunch of workers that sample from the environment and store results in a central prioritized replay. One learner on a GPU samples from that replay and computes gradient updates. The workers refresh their parameters every now and then. They get to about double the median performance as Rainbow did using this method.
-
-[Distributed Distributional Deep Deterministic Policy Gradients](https://openreview.net/pdf?id=SyZipzbCb) uses DDPG + distributional Bellman idea + distributed system from Ape-X (paper directly above this) for continuous control tasks.
-
-# Imitation Learning / Learning from Demonstrations
-Simple approach to solving reinforcement learning problems. Just frame the problem completely as a supervised learning problem to predict the correct action given a dataset of human experience.
-
-Can be surprisingly succesful given how simple it is to use in practice. For example in self driving cars (see Nvidia example), they simple train a deep ConvNet with outputs being the actuators of the car. The disadvantages of this are of course you need very large datasets of human experience which can be hard to collect.
-
-One of the major practical issues is that of compounding errors. When the classifier makes a mistake and begins to see a trajectory and/or states that is hasn't seen in training, all bets are off whether it will work correctly. We hope (as is usual in deep networks), that the network can generalize over the input manifold to areas that is has never seen before, but we know in practice this is rarely the case.
-
-Dataset Aggregation Algorithm (DAgger) is a simple online learning algorithm that looks to iteratively combat the compounding errors issue. You train on the dataset. Then run your policy at test time and record your observations. Then have a human label the observations with the correct state. In one sense, this is supposed to teach your algorithm how to correct itself when it makes errors.
-
-[DART](http://bair.berkeley.edu/blog/2017/10/26/dart/) is a technique from berkeley to help do imitation learning by adding noise to the demonstrations. 
-
-[End to End Learning for Self Driving Cars (Nvidia 2016)](https://arxiv.org/abs/1604.07316) Nvidia trains a self driving car using an end to end convolutional neural network. It is trained directly from human driving footage. They also do neat tricks with using three cameras that view the road from different angles (see berkeley course above for explanation)
-
-[Learning from Demonstrations for Real World Reinforcement Learning](https://arxiv.org/pdf/1704.03732) DQfD. They use a small set of demonstrations on Atari games to initialize a Deep Q Learning algorithm, then run the algorithm in the environment and let it learn. Learns really quick using a combination of the two. They use a sum of different loss terms to make sure it doesn't forget the demonstrations.
-
-[Learning Complex Dexterous Manipulation with Deep Reinforcement Learning and Demonstrations](https://arxiv.org/abs/1709.10087) they use a combination of demonstrations + policy gradient terms in one loss function to allow it to match the demonstrations while also learning from RL. It does well with very complex hand-manipulation tasks.
-
-[Leveraging Demonstrations for Deep Reinforcement Learning on Robotics Problems with Sparse Rewards](https://arxiv.org/abs/1707.08817) uses demonstrations and DDPG for a real robot task and train on both demonstrations and real world data.
-
-[Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) This paper is really good. They use a VR headset to directly demonstrate how a robot should do things like grasping. It is able to learn directly from pixels to actions in only about 30 minutes or less of human demonstrations.
-
-__Third Person Imitation Learning__:
-
-Third person imitation learning is obviously a bold goal, and would have fantastic implications. Like perhaps a robot could just watch youtube all day at 10000x speed and then learn how to do everything. 
-
-The general approach people have tried is to learn some sort of embedding that is invariant to different viewpoints. For example, when you are from a third person or first person view of someone pouring water in a cup, the embedding space should be the same. Some techniques have used domain confusion to train a discriminator that attempts to classify whether the embedding space is from one view or another. Once the discriminator has been fooled, we have invariant embeddings. You can then try to match the third person imitator by making your first person attempt match their third person embedding.
-
-[Third-Person Imitation Learning](https://arxiv.org/abs/1703.01703) is the paper using the domain confusion idea.
-
-[Time-Contrastive Networks](https://arxiv.org/abs/1704.06888z) show some really strong results. They learn invariant embeddings by training on both first and third person video. They have a clever idea where they use a triplet loss, frames that happen at the same time step (i.e. water is about to exit a cup) from different angles must have the same embedding; frames from different time steps but the same angle must have different embeddings. Then have the robot use the learned embedding and reinforcement learning to try to match the demonstration.
-
-
 # Model Based Reinforcement Learning
 
 At a high level, you use a model of the enviroment (continuous or discrete) to do some sort of planning or simulation in order to generate your policy. 
@@ -282,6 +239,46 @@ The only main advantage of these algorithms is that they can be scaled really we
 
 [Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864) uses a very clever trick to parallelize Evolution Strategies to train tasks. The main advantage of using an approach like this that is has great wall clock time if you parallelize it really well, and also that it can learn very diverse policies because it searches through the parameter weights. A nice package and blog post is listed [here](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/).
 
+
+
+# Parallel Training of Reinforcement Learning:
+
+[Gorila](https://arxiv.org/pdf/1507.04296.pdf) demonstrates training the DQN algorithm in a distributed computation setting across many parallel workers. It uses a shared parameter server as is common in the Google Brain research work. It shows nice speed ups and good results.
+
+[Distributed Prioritized Experience Replay](https://openreview.net/pdf?id=H1Dy---0Z) gets amazing results. They have a bunch of workers that sample from the environment and store results in a central prioritized replay. One learner on a GPU samples from that replay and computes gradient updates. The workers refresh their parameters every now and then. They get to about double the median performance as Rainbow did using this method.
+
+[Distributed Distributional Deep Deterministic Policy Gradients](https://openreview.net/pdf?id=SyZipzbCb) uses DDPG + distributional Bellman idea + distributed system from Ape-X (paper directly above this) for continuous control tasks.
+
+# Imitation Learning / Learning from Demonstrations
+Simple approach to solving reinforcement learning problems. Just frame the problem completely as a supervised learning problem to predict the correct action given a dataset of human experience.
+
+Can be surprisingly succesful given how simple it is to use in practice. For example in self driving cars (see Nvidia example), they simple train a deep ConvNet with outputs being the actuators of the car. The disadvantages of this are of course you need very large datasets of human experience which can be hard to collect.
+
+One of the major practical issues is that of compounding errors. When the classifier makes a mistake and begins to see a trajectory and/or states that is hasn't seen in training, all bets are off whether it will work correctly. We hope (as is usual in deep networks), that the network can generalize over the input manifold to areas that is has never seen before, but we know in practice this is rarely the case.
+
+Dataset Aggregation Algorithm (DAgger) is a simple online learning algorithm that looks to iteratively combat the compounding errors issue. You train on the dataset. Then run your policy at test time and record your observations. Then have a human label the observations with the correct state. In one sense, this is supposed to teach your algorithm how to correct itself when it makes errors.
+
+[DART](http://bair.berkeley.edu/blog/2017/10/26/dart/) is a technique from berkeley to help do imitation learning by adding noise to the demonstrations. 
+
+[End to End Learning for Self Driving Cars (Nvidia 2016)](https://arxiv.org/abs/1604.07316) Nvidia trains a self driving car using an end to end convolutional neural network. It is trained directly from human driving footage. They also do neat tricks with using three cameras that view the road from different angles (see berkeley course above for explanation)
+
+[Learning from Demonstrations for Real World Reinforcement Learning](https://arxiv.org/pdf/1704.03732) DQfD. They use a small set of demonstrations on Atari games to initialize a Deep Q Learning algorithm, then run the algorithm in the environment and let it learn. Learns really quick using a combination of the two. They use a sum of different loss terms to make sure it doesn't forget the demonstrations.
+
+[Learning Complex Dexterous Manipulation with Deep Reinforcement Learning and Demonstrations](https://arxiv.org/abs/1709.10087) they use a combination of demonstrations + policy gradient terms in one loss function to allow it to match the demonstrations while also learning from RL. It does well with very complex hand-manipulation tasks.
+
+[Leveraging Demonstrations for Deep Reinforcement Learning on Robotics Problems with Sparse Rewards](https://arxiv.org/abs/1707.08817) uses demonstrations and DDPG for a real robot task and train on both demonstrations and real world data.
+
+[Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) This paper is really good. They use a VR headset to directly demonstrate how a robot should do things like grasping. It is able to learn directly from pixels to actions in only about 30 minutes or less of human demonstrations.
+
+__Third Person Imitation Learning__:
+
+Third person imitation learning is obviously a bold goal, and would have fantastic implications. Like perhaps a robot could just watch youtube all day at 10000x speed and then learn how to do everything. 
+
+The general approach people have tried is to learn some sort of embedding that is invariant to different viewpoints. For example, when you are from a third person or first person view of someone pouring water in a cup, the embedding space should be the same. Some techniques have used domain confusion to train a discriminator that attempts to classify whether the embedding space is from one view or another. Once the discriminator has been fooled, we have invariant embeddings. You can then try to match the third person imitator by making your first person attempt match their third person embedding.
+
+[Third-Person Imitation Learning](https://arxiv.org/abs/1703.01703) is the paper using the domain confusion idea.
+
+[Time-Contrastive Networks](https://arxiv.org/abs/1704.06888z) show some really strong results. They learn invariant embeddings by training on both first and third person video. They have a clever idea where they use a triplet loss, frames that happen at the same time step (i.e. water is about to exit a cup) from different angles must have the same embedding; frames from different time steps but the same angle must have different embeddings. Then have the robot use the learned embedding and reinforcement learning to try to match the demonstration.
 
 
 ## Multi-Agent Domains
