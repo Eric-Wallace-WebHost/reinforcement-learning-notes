@@ -15,13 +15,14 @@ Table of contents
   * [Model Based and Model Free Combinations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-based--model-free-combinations)
 * [Derivative Free Optimization](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#derivative-free-optimization)
 * [Parallel Training of Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#parallel-training-of-reinforcement-learning) 
-* [Imitation Learning and Learning from Demonstrations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning--behavorial-cloning--learning-from-demonstrations)
+* [Demonstration Based Methods]
+  * [Imitation Learning and Learning from Demonstrations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning--behavorial-cloning--learning-from-demonstrations)
+  * [Inverse Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#inverse-reinforcement-learning)
 * [Multi-Agent Domains](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#multi-agent-domains)
-* [Self Play](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#self-play)
-* [Cooperation Amongst Agents](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#cooperation-amongst-agents)
+  * [Self Play](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#self-play)
+  * [Cooperation Amongst Agents](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#cooperation-amongst-agents)
 * [Sim2Real Transfer](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#sim2real-transfer)
 * [Heirarchical Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#heirarchical-reinforcement-learning)
-* [Inverse Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#inverse-reinforcement-learning)
 * [Meta Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#meta-learning)
 * [Transfering Policies / Multi-Task Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#transfering-policies--multi-task-reinforcement-learning)
 * [Learning Resources](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#learning-resources)
@@ -281,6 +282,11 @@ The general approach people have tried is to learn some sort of embedding that i
 [Time-Contrastive Networks](https://arxiv.org/abs/1704.06888z) show some really strong results. They learn invariant embeddings by training on both first and third person video. They have a clever idea where they use a triplet loss, frames that happen at the same time step (i.e. water is about to exit a cup) from different angles must have the same embedding; frames from different time steps but the same angle must have different embeddings. Then have the robot use the learned embedding and reinforcement learning to try to match the demonstration.
 
 
+## Inverse Reinforcement Learning
+
+Alternative to Imitation Learning, where instead we try to learn the reward function from expert demonstrations. Once we have the reward function, we can then use more general Reinforcement Learning techniques to solve the problem.
+
+
 ## Multi-Agent Domains
 
 # Self Play
@@ -323,9 +329,6 @@ Most of the approaches here use a high level controller that selects which low l
 
 [Meta Learning Shared Heirachies](https://arxiv.org/abs/1710.09767) incorporates meta learning into heirarchical structure.
 
-## Inverse Reinforcement Learning
-
-Alternative to Imitation Learning, where instead we try to learn the reward function from expert demonstrations. Once we have the reward function, we can then use more general Reinforcement Learning techniques to solve the problem.
 
 ## Meta Learning
 
