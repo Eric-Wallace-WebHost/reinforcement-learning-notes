@@ -24,7 +24,7 @@ Table of contents
 * [Inverse Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#inverse-reinforcement-learning)
 * [Meta Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#meta-learning)
 * [Transfering Policies / Multi-Task Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#transfering-policies--multi-task-reinforcement-learning)
-* Learning Resources
+* [Learning Resources](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#learning-resources)
 
 
 # Model Free Reinforcement Learning
