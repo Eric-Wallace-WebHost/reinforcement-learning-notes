@@ -185,12 +185,11 @@ Dataset Aggregation Algorithm (DAgger) is a simple online learning algorithm tha
 
 [DART](http://bair.berkeley.edu/blog/2017/10/26/dart/) is a technique from berkeley to help do imitation learning by adding noise to the demonstrations. 
 
-Learning References:
-* [Berkeley Deep RL Course Lecture 2](https://www.youtube.com/watch?v=kl_G95uKTHw&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX&index=2) discusses imitation learning, DAgger, and other techniques. Has links to papers and case studies
-
 [End to End Learning for Self Driving Cars (Nvidia 2016)](https://arxiv.org/abs/1604.07316) Nvidia trains a self driving car using an end to end convolutional neural network. It is trained directly from human driving footage. They also do neat tricks with using three cameras that view the road from different angles (see berkeley course above for explanation)
 
-[Learning from Demonstrations for Real World Reinforcement Learning](https://arxiv.org/pdf/1704.03732) DQfD. They use a small set of demonstrations on Atari games to initialize a Deep Q Learning algorithm, then run the algorithm in the environment and let it learn. Learns really quick using a combination of the two. 
+[Learning from Demonstrations for Real World Reinforcement Learning](https://arxiv.org/pdf/1704.03732) DQfD. They use a small set of demonstrations on Atari games to initialize a Deep Q Learning algorithm, then run the algorithm in the environment and let it learn. Learns really quick using a combination of the two. They use a sum of different loss terms to make sure it doesn't forget the demonstrations.
+
+[Learning Complex Dexterous Manipulation with Deep Reinforcement Learning and Demonstrations](https://arxiv.org/abs/1709.10087) they use a combination of demonstrations + policy gradient terms in one loss function to allow it to match the demonstrations while also learning from RL. It does well with very complex hand-manipulation tasks.
 
 [Leveraging Demonstrations for Deep Reinforcement Learning on Robotics Problems with Sparse Rewards](https://arxiv.org/abs/1707.08817) uses demonstrations and DDPG for a real robot task and train on both demonstrations and real world data.
 
@@ -230,11 +229,6 @@ DYNA Algorithm
 
 __TODO__: This is mentioned in David Silver's lectures
 
-Learning References:
-* [Berkeley Deep RL Course Lecture 3-6](https://www.youtube.com/watch?v=mZtlW_xtarI&index=3&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX) discusses model based reinforcement learning in depth.
-* [Lecture 9 of Berkeley Reinforcement Learning Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures) discusses LQR, MPC, and guided policy search.
-* [Lecture 8 of David Silver's Reinforcement Learning Course](https://www.youtube.com/watch?v=ItMutbeOHtc&index=8&list=PLzuuYNsE1EZAXYR4FJ75jcJseBmo4KQ9-) discusses learning models, DYNA, and MCTS
-
 Guided Policy Search
 
 
@@ -262,19 +256,14 @@ These two papers use actor critic with a centralized critic for mulit-agent doma
 
 https://arxiv.org/pdf/1703.10069.pdf
 
-Key Papers:
+CommNet Facebook
 
 ## Derivative Free Optimization
 A broad class of algorithms that consists of things like Genetic Algorithms, Evolutionary Algorithms, Evolutionary Search, and closely related others. Most of these algorithms are essentially random parameter search + heuristics. In the case when a derivative can be computed analytically (supervised learning, Q learning, policy gradients using reinforce trick), these algorithms are dumb because they don't move in that direction.
 
-The only main advantage of these algorithms is that they can be scaled really well in parallel. The best paper is OpenAI's work that uses a clever trick where the seperate workers exchange what random seed they used rather than the actual parameters of the system.
+The only main advantage of these algorithms is that they can be scaled really well in parallel. The best paper is OpenAI's work that uses a clever trick where the seperate workers exchange what random seed they used rather than the actual parameters of the system. 
 
-Learning References:
-[Lecture 8 of Berkeley Deep RL Bootcamp](https://sites.google.com/view/deep-rl-bootcamp/lectures)
-
-Key Papers:
-[Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864)
-[Evolution Strategies Package and Blog Post](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/)
+[Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864) uses a very clever trick to parallelize Evolution Strategies to train tasks. The main advantage of using an approach like this that is has great wall clock time if you parallelize it really well, and also that it can learn very diverse policies because it searches through the parameter weights. A nice package and blog post is listed [here](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/).
 
 ## Sim2Real Transfer
 Most of the exciting recent work has shown that your simulator does not need to be accurate, but rather, it needs to have a high degree of variability for things you want your model to be invariant to. For example, random lighting, colors, shapes, etc. will help your model generalize well. Recent work has shown that if you randomize the dynamics and/or visualize environment you can transfer to the real world with no real world training. 
@@ -291,7 +280,9 @@ Most of the exciting recent work has shown that your simulator does not need to 
 Most of the approaches here use a high level controller that selects which low level controller to do the job. One famous approach is the options framework. The options are low level policies which run until some termination condition.   
 
 [Option Critic](https://arxiv.org/abs/1609.05140) framework selects low level option pieces from a high level policy.
+
 [Fuedal Networks](https://arxiv.org/abs/1703.01161) use a high level manager that issues goals to its workers. Depending on the goal, workers are selected and then they execute their sub-policy. The workers are trained for the reward and back propagated through using normal policy gradient methods. The high level manager is trained based on what the underlying workers did, not what the goal it sent was. It gets some really nice results and seems overall better and cleaner than option-critic.
+
 [Meta Learning Shared Heirachies](https://arxiv.org/abs/1710.09767) incorporates meta learning into heirarchical structure.
 
 ## Inverse Reinforcement Learning
@@ -317,10 +308,12 @@ It seems like doing Imitation Learning via a VR system, and running meta learnin
 ## Transfering Policies / Multi-Task Reinforcement Learning
 
 [Policy Distillation](https://arxiv.org/abs/1511.06295) trains a number of different agents for individual Atari games. Then they run each of the different agents for a while and collect an experience replay for each one. They then train a single agent that emulates the results of all of the individual agents. The single agent is basically able to do as well as all the individual agents.
-[Actor Mimic](https://arxiv.org/abs/1511.06342) is basically the exact same approach as policy distillation. 
-[Progressive Reinforcement Learning with Distillation for Multi-Skilled Motion Control](https://openreview.net/pdf?id=B13njo1R-) applies policy distillation to the continuous setting and adds a few additions.
-[Distral](http://papers.nips.cc/paper/7036-distral-robust-multitask-reinforcement-learning.pdf) they use the same idea as policy distillation, but it runs in a more online fashion and uses the distilled policy to help regularize the individual experts. 
 
+[Actor Mimic](https://arxiv.org/abs/1511.06342) is basically the exact same approach as policy distillation. 
+
+[Progressive Reinforcement Learning with Distillation for Multi-Skilled Motion Control](https://openreview.net/pdf?id=B13njo1R-) applies policy distillation to the continuous setting and adds a few additions.
+
+[Distral](http://papers.nips.cc/paper/7036-distral-robust-multitask-reinforcement-learning.pdf) they use the same idea as policy distillation, but it runs in a more online fashion and uses the distilled policy to help regularize the individual experts. 
 
 ## Learning Resources
 
