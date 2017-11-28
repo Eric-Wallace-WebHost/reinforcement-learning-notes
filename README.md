@@ -3,16 +3,32 @@ This repository contains notes on a number of Reinforcement Learning papers and 
 If you are new to the field, I recommend taking a look at David Silver's online course, as well as Berkeley's course on Deep RL.
 
 
-[I. Model Free Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-free-reinforcement-learning)
+[Model-Free Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-free-reinforcement-learning)
 
-     [A. Policy Gradient Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#policy-gradient-methods)
+[Policy Gradient Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#policy-gradient-methods)
   
-     [B. Value Learning Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#value-learning--q---learning)
+[Value Learning Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#value-learning--q---learning)
  
- [II. Parallel Training of Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#parallel-training-of-reinforcement-learning)
+[Parallel Training of Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#parallel-training-of-reinforcement-learning)
  
- 
-  
+[Imitation Learning and Learning from Demonstrations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning--behavorial-cloning--learning-from-demonstrations)
+
+[Model-Based Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-based-reinforcement-learning)
+
+[Control Systems Based Approaches](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#control-systems-based-approaches-continuous-domains)
+
+[Discrete Planning Based Approaches](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#planning-based-approaches-discrete-domains)
+
+[Model Based and Model Free Combinations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-based--model-free-combinations)
+
+[Derivative Free Optimization](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#derivative-free-optimization)
+
+[Multi-Agent Domains](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#multi-agent-domains)
+
+[Self Play](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#self-play)
+
+[Cooperation Amongst Agents](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#cooperation-amongst-agents)
+
 
 # Model Free Reinforcement Learning
 
@@ -257,6 +273,17 @@ Predictron
 
 Value Iteration Networks
 
+
+
+## Derivative Free Optimization
+A broad class of algorithms that consists of things like Genetic Algorithms, Evolutionary Algorithms, Evolutionary Search, and closely related others. Most of these algorithms are essentially random parameter search + heuristics. In the case when a derivative can be computed analytically (supervised learning, Q learning, policy gradients using reinforce trick), these algorithms are dumb because they don't move in that direction.
+
+The only main advantage of these algorithms is that they can be scaled really well in parallel. The best paper is OpenAI's work that uses a clever trick where the seperate workers exchange what random seed they used rather than the actual parameters of the system. 
+
+[Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864) uses a very clever trick to parallelize Evolution Strategies to train tasks. The main advantage of using an approach like this that is has great wall clock time if you parallelize it really well, and also that it can learn very diverse policies because it searches through the parameter weights. A nice package and blog post is listed [here](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/).
+
+
+
 ## Multi-Agent Domains
 
 # Self Play
@@ -278,13 +305,6 @@ These two papers use actor critic with a centralized critic for mulit-agent doma
 https://arxiv.org/pdf/1703.10069.pdf
 
 CommNet Facebook
-
-## Derivative Free Optimization
-A broad class of algorithms that consists of things like Genetic Algorithms, Evolutionary Algorithms, Evolutionary Search, and closely related others. Most of these algorithms are essentially random parameter search + heuristics. In the case when a derivative can be computed analytically (supervised learning, Q learning, policy gradients using reinforce trick), these algorithms are dumb because they don't move in that direction.
-
-The only main advantage of these algorithms is that they can be scaled really well in parallel. The best paper is OpenAI's work that uses a clever trick where the seperate workers exchange what random seed they used rather than the actual parameters of the system. 
-
-[Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864) uses a very clever trick to parallelize Evolution Strategies to train tasks. The main advantage of using an approach like this that is has great wall clock time if you parallelize it really well, and also that it can learn very diverse policies because it searches through the parameter weights. A nice package and blog post is listed [here](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/).
 
 ## Sim2Real Transfer
 Most of the exciting recent work has shown that your simulator does not need to be accurate, but rather, it needs to have a high degree of variability for things you want your model to be invariant to. For example, random lighting, colors, shapes, etc. will help your model generalize well. Recent work has shown that if you randomize the dynamics and/or visualize environment you can transfer to the real world with no real world training. 
