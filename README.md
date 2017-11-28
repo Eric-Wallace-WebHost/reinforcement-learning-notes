@@ -5,9 +5,9 @@ If you are new to the field, I recommend taking a look at David Silver's online 
 
 [I. Model Free Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-free-reinforcement-learning)
 
-  [A. Policy Gradient Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#policy-gradient-methods)
+     [A. Policy Gradient Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#policy-gradient-methods)
   
-  [B. Value Learning Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#value-learning--q---learning)
+     [B. Value Learning Methods](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#value-learning--q---learning)
  
  [II. Parallel Training of Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#parallel-training-of-reinforcement-learning)
  
