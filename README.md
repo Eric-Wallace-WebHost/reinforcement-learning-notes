@@ -15,9 +15,9 @@ Table of contents
   * [Model Based and Model Free Combinations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-based--model-free-combinations)
 * [Derivative Free Optimization](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#derivative-free-optimization)
 * [Parallel Training of Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#parallel-training-of-reinforcement-learning) 
-* [Demonstration Based Methods]
-  * [Imitation Learning and Learning from Demonstrations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning--learning-from-demonstrations)
-  * [Inverse Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#inverse-reinforcement-learning)
+* [Learning from Demonstrations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#learning-from-demonstrations)
+  * [Imitation Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning--learning-from-demonstrations)
+  * [Inverse Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning)
 * [Multi-Agent Domains](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#multi-agent-domains)
   * [Self Play](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#self-play)
   * [Cooperation Amongst Agents](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#cooperation-amongst-agents)
