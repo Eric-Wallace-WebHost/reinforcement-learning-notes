@@ -178,6 +178,8 @@ I wonder if anyone has tried to do pretraining of convolution layers. Say do obj
 
 [Gorila](https://arxiv.org/pdf/1507.04296.pdf) demonstrates training the DQN algorithm in a distributed computation setting across many parallel workers. It uses a shared parameter server as is common in the Google Brain research work. It shows nice speed ups and good results.
 
+[Asynchronous Advantage Actor Critic](https://arxiv.org/abs/1602.01783) experiments using distributed SARSA, Q-Learning, and Advantage Actor Critic. Demonstrates that distributed learning can speed up in terms of wall clock time.
+
 [Distributed Prioritized Experience Replay](https://openreview.net/pdf?id=H1Dy---0Z) gets amazing results. They have a bunch of workers that sample from the environment and store results in a central prioritized replay. One learner on a GPU samples from that replay and computes gradient updates. The workers refresh their parameters every now and then. They get to about double the median performance as Rainbow did using this method.
 
 [Distributed Distributional Deep Deterministic Policy Gradients](https://openreview.net/pdf?id=SyZipzbCb) uses DDPG + distributional Bellman idea + distributed system from Ape-X (paper directly above this) for continuous control tasks.
