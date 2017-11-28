@@ -1,7 +1,6 @@
-This repository contains notes on a number of Reinforcement Learning papers and algorithms. The main focus is on Deep Reinforcement Learning with papers starting from 2013.
+This read me contains notes on a number of Reinforcement Learning papers and algorithms. The main focus is on Deep Reinforcement Learning with papers starting from 2013.
 
-If you are new to the field, I recommend taking a look at David Silver's online course, as well as Berkeley's course on Deep RL.
-
+If you are new to the field, I recommend taking a look at the [Learning Resources](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#learning-resources) at the end of the read me.
 
 Table of contents
 =================
@@ -25,8 +24,6 @@ Table of contents
 * [Heirarchical Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#heirarchical-reinforcement-learning)
 * [Meta Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#meta-learning)
 * [Transfering Policies / Multi-Task Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#transfering-policies--multi-task-reinforcement-learning)
-* [Learning Resources](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#learning-resources)
-
 
 # Model Free Reinforcement Learning
 
