@@ -57,9 +57,14 @@ of from the policy.
 
 [Emergence of Locomotion Behaviours in Rich Environments](https://arxiv.org/abs/1707.02286) use a distributed PPO to train locomotion on hard domains like parkour and get some really cool results.
 
-__Other Ideas__:
+__Combining Off-Policy and On-Policy__:
 
 [Sample-Efficient Actor Critic with Experience Replay](https://arxiv.org/abs/1611.01224) Describes a method to adding an experience replay and off-policy learning to actor critic algorithms. They do this through a truncated importance sampling technique that allows you to learn off policy. They also present some interesting things like using an average of past policies as an approximation to TRPO. Though I think that last point is unneccesary when you have ACTKR or PPO.
+
+[Q-Prop: Sample-Efficient Policy Gradient with an Off-Policy Critic](https://arxiv.org/abs/1611.02247) rather than learn both the Critic and Actor in an off-policy manner like ACER, they only learn the critic off-policy. This is an unbiased method, but only makes the critic better off policy. 
+
+[Interpolated Policy Gradient: Merging On-Policy and Off-Policy Gradient Estimation for Deep Reinforcement Learning](https://arxiv.org/abs/1706.00387) is a follow up to the Q-Prop paper. Q-Prop is unbiased, but doesn't benefit from on-policy learning from the critic. ACER is biased, but it is hard to say just how bad the bias is, and it seems to do ok in practice. This paper tries to 
+unify these two approaches in a more general framework.
 
 __Exploration in Policy Gradients__:
 
@@ -107,7 +112,7 @@ There has been a whole host of improvements to Deep Q-learning. Many of these al
 
 [Prioritized Experience Replay](https://arxiv.org/abs/1511.05952) is an idea that fixes the naive uniform random sampling from the experience replay used in DQN. The paper talks at length at how you can make this more efficient, because otherwise you will have to do computation and search over all elements in the experience replay (~ 1,000,000 elements) which will be super expensive for every step in the network. They use some nice ideas like KD trees to do this.  
 
-N-Step Q-Learning doesn't have a paper as it is a very idea but it is used in the Rainbow paper. Due to the fact that we are using e-greedy Q-Learning and learning off-policy, we can't easily use eligibility traces. You can get around this and doing Q(lambda) by doing something like keep track of whenever you acted randomly, and stop updating the rewards at that point. This can be quite awkward though. A simple idea is just use an n-step target for the update. This is also a little awkward as the first state will have n-steps of reward to approximate and the final non-terminal state will just have a 1-step target, but that is okay. This should get nice gains by reducing variance, especially early in the training phase.
+N-Step Q-Learning -> Due to the fact that we are using e-greedy Q-Learning and learning off-policy, we can't easily use eligibility traces. You can get around this and doing Q(lambda) by doing something like keep track of whenever you acted randomly, and stop updating the rewards at that point. This can be quite awkward though. A simple idea is just use an n-step target (in the forward view) for the update. This is also a little awkward as the first state will have n-steps of reward to approximate and the final non-terminal state will just have a 1-step target, but that is okay. This should help acclerate learning by propagating rewards back to previous states.
 
 [Rainbow: Combining improvements in Deep Reinforcement Learning](https://arxiv.org/abs/1710.02298) combines all of the above techniques and the distributional c-51 algorithm below into one algorithm that does super well.
 
