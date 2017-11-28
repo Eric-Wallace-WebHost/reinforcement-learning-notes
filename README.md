@@ -16,7 +16,7 @@ Table of contents
 * [Derivative Free Optimization](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#derivative-free-optimization)
 * [Parallel Training of Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#parallel-training-of-reinforcement-learning) 
 * [Demonstration Based Methods]
-  * [Imitation Learning and Learning from Demonstrations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning--behavorial-cloning--learning-from-demonstrations)
+  * [Imitation Learning and Learning from Demonstrations](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#imitation-learning--learning-from-demonstrations)
   * [Inverse Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#inverse-reinforcement-learning)
 * [Multi-Agent Domains](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#multi-agent-domains)
   * [Self Play](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#self-play)
@@ -187,8 +187,6 @@ The parameter noise paper (above in Policy Gradient Exploration section) also sh
 
 __Aditional Exploratory Work__:
 
-[Sample-Efficient Actor Critic with Experience Replay](https://arxiv.org/abs/1611.01224) Describes a method to adding an experience replay and off-policy learning to actor critic algorithms. They do this through a truncated importance sampling technique that allows you to learn off policy. They also present some interesting things like using an average of past policies as an approximation to TRPO. Though I think that last point is unneccesary when you have ACTKR or PPO.
-
 [Reinforcement Learning with Unsupervised Auxiliary Tasks (UNREAL)](https://arxiv.org/abs/1611.05397) adds auxiliary tasks to a reinforcement learning agent such as pixel control. The agent reuses some of the neural network architecture for these auxiliary tasks, so it can help to do stuff like do additional training of convolutional layers. 
 
 I wonder if anyone has tried to do pretraining of convolution layers. Say do object detection on another tasks like ImageNet, then transfer the lower layers to your agent and initialize them from there.
@@ -233,7 +231,7 @@ Value Iteration Networks
 
 
 
-## Derivative Free Optimization
+# Derivative Free Optimization
 A broad class of algorithms that consists of things like Genetic Algorithms, Evolutionary Algorithms, Evolutionary Search, and closely related others. Most of these algorithms are essentially random parameter search + heuristics. In the case when a derivative can be computed analytically (supervised learning, Q learning, policy gradients using reinforce trick), these algorithms are dumb because they don't move in that direction.
 
 The only main advantage of these algorithms is that they can be scaled really well in parallel. The best paper is OpenAI's work that uses a clever trick where the seperate workers exchange what random seed they used rather than the actual parameters of the system. 
@@ -250,7 +248,9 @@ The only main advantage of these algorithms is that they can be scaled really we
 
 [Distributed Distributional Deep Deterministic Policy Gradients](https://openreview.net/pdf?id=SyZipzbCb) uses DDPG + distributional Bellman idea + distributed system from Ape-X (paper directly above this) for continuous control tasks.
 
-# Imitation Learning / Learning from Demonstrations
+# Learning from Demonstrations
+
+## Imitation Learning
 Simple approach to solving reinforcement learning problems. Just frame the problem completely as a supervised learning problem to predict the correct action given a dataset of human experience.
 
 Can be surprisingly succesful given how simple it is to use in practice. For example in self driving cars (see Nvidia example), they simple train a deep ConvNet with outputs being the actuators of the car. The disadvantages of this are of course you need very large datasets of human experience which can be hard to collect.
@@ -287,9 +287,9 @@ The general approach people have tried is to learn some sort of embedding that i
 Alternative to Imitation Learning, where instead we try to learn the reward function from expert demonstrations. Once we have the reward function, we can then use more general Reinforcement Learning techniques to solve the problem.
 
 
-## Multi-Agent Domains
+# Multi-Agent Domains
 
-# Self Play
+## Self Play
 AlphaGo Zero of course
 OpenAI Dota
 
@@ -297,7 +297,7 @@ OpenAI Dota
 
 [Opponent Modeling in Deep Reinforcement Learning](https://arxiv.org/abs/1609.05559) models the opponent by generating an additional feature vector from their actions. 
 
-# Cooperation Amongst Agents
+## Cooperation Amongst Agents
 
 [Counterfactual Multi-Agent Policy Gradients](https://arxiv.org/abs/1705.08926) 
 [Multi-Agent Actor Critic](https://arxiv.org/abs/1706.02275)
@@ -309,7 +309,7 @@ https://arxiv.org/pdf/1703.10069.pdf
 
 CommNet Facebook
 
-## Sim2Real Transfer
+# Sim2Real Transfer
 Most of the exciting recent work has shown that your simulator does not need to be accurate, but rather, it needs to have a high degree of variability for things you want your model to be invariant to. For example, random lighting, colors, shapes, etc. will help your model generalize well. Recent work has shown that if you randomize the dynamics and/or visualize environment you can transfer to the real world with no real world training. 
 
 [Domain Randomization for Transferring Deep Neural Networks from Simulation to the Real World](https://arxiv.org/pdf/1703.06907.pdf) uses random changes to the environment for better generalization. Such as changes in lighting and colors.
@@ -319,7 +319,7 @@ Most of the exciting recent work has shown that your simulator does not need to 
 [Asymmetric Actor Critic for Image-Based Robot Learning](https://arxiv.org/pdf/1710.06542.pdf) proposes a nice idea that since we are in a simulator, you can cheat and give the critic full state information. The actor won't get anything special, but the critic will. This allows you to train and learn a lot faster.
 
 
-## Heirarchical Reinforcement Learning
+# Heirarchical Reinforcement Learning
 
 Most of the approaches here use a high level controller that selects which low level controller to do the job. One famous approach is the options framework. The options are low level policies which run until some termination condition.   
 
@@ -330,7 +330,7 @@ Most of the approaches here use a high level controller that selects which low l
 [Meta Learning Shared Heirachies](https://arxiv.org/abs/1710.09767) incorporates meta learning into heirarchical structure.
 
 
-## Meta Learning
+# Meta Learning
 
 The general approach is to learn a policy that is good at learning in new environments. So "Meta" learning is that we are training an agent that is good at learning. 
 
@@ -346,7 +346,7 @@ Simple Neural Attentive Meta learner -> Replaces RL^2 with a dilated convolution
 
 It seems like doing Imitation Learning via a VR system, and running meta learning to get good parameters, and then maybe using the learned model and fine tuning it in simulation could get some really nice results. The next steps would be how do you combine many learned policies into one system that can actually be intelligent. Heirarchies? Who knows.
 
-## Transfering Policies / Multi-Task Reinforcement Learning
+# Transfering Policies / Multi-Task Reinforcement Learning
 
 [Policy Distillation](https://arxiv.org/abs/1511.06295) trains a number of different agents for individual Atari games. Then they run each of the different agents for a while and collect an experience replay for each one. They then train a single agent that emulates the results of all of the individual agents. The single agent is basically able to do as well as all the individual agents.
 
@@ -356,7 +356,7 @@ It seems like doing Imitation Learning via a VR system, and running meta learnin
 
 [Distral](http://papers.nips.cc/paper/7036-distral-robust-multitask-reinforcement-learning.pdf) they use the same idea as policy distillation, but it runs in a more online fashion and uses the distilled policy to help regularize the individual experts. 
 
-## Learning Resources
+# Learning Resources
 
 * [Andrej Karpathy's Explanation](http://karpathy.github.io/2016/05/31/rl)
 * [Berkeley Deep RL Bootcamp Lectures](https://sites.google.com/view/deep-rl-bootcamp/lectures)
