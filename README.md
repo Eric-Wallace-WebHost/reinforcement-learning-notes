@@ -2,6 +2,9 @@ This repository contains notes on a number of Reinforcement Learning papers and 
 
 If you are new to the field, I recommend taking a look at David Silver's online course, as well as Berkeley's course on Deep RL.
 
+[Model Free Reinforcement Learning](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#model-free-reinforcement-learning)
+
+
 # Model Free Reinforcement Learning
 
 A general class of algorithms that makes no attempt to learn the underlying dynamics of the system, nor do any planning in the future. This can cause large sample inefficiencies, but in practice these algorithms currently learn the best policies out of all classes of algorithms.
