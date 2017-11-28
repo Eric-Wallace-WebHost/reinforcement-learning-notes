@@ -188,11 +188,13 @@ Dataset Aggregation Algorithm (DAgger) is a simple online learning algorithm tha
 Learning References:
 * [Berkeley Deep RL Course Lecture 2](https://www.youtube.com/watch?v=kl_G95uKTHw&list=PLkFD6_40KJIwTmSbCv9OVJB3YaO4sFwkX&index=2) discusses imitation learning, DAgger, and other techniques. Has links to papers and case studies
 
-Key Papers:
-* [End to End Learning for Self Driving Cars (Nvidia 2016)](https://arxiv.org/abs/1604.07316) Nvidia trains a self driving car using an end to end convolutional neural network. It is trained directly from human driving footage. They also do neat tricks with using three cameras that view the road from different angles (see berkeley course above for explanation)
-* [Learning from Demonstrations for Real World Reinforcement Learning](https://arxiv.org/pdf/1704.03732.pdf) DQfD. They use a small set of demonstrations on Atari games to initialize a Deep Q Learning algorithm, then run the algorithm in the environment and let it learn. Learns really quick using a combination of the two. 
+[End to End Learning for Self Driving Cars (Nvidia 2016)](https://arxiv.org/abs/1604.07316) Nvidia trains a self driving car using an end to end convolutional neural network. It is trained directly from human driving footage. They also do neat tricks with using three cameras that view the road from different angles (see berkeley course above for explanation)
 
-* [Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) This paper is really good. They use a VR headset to directly demonstrate how a robot should do things like grasping. It is able to learn directly from pixels to actions in only about 30 minutes or less of human demonstrations.
+[Learning from Demonstrations for Real World Reinforcement Learning](https://arxiv.org/pdf/1704.03732) DQfD. They use a small set of demonstrations on Atari games to initialize a Deep Q Learning algorithm, then run the algorithm in the environment and let it learn. Learns really quick using a combination of the two. 
+
+[Leveraging Demonstrations for Deep Reinforcement Learning on Robotics Problems with Sparse Rewards](https://arxiv.org/abs/1707.08817) uses demonstrations and DDPG for a real robot task and train on both demonstrations and real world data.
+
+[Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) This paper is really good. They use a VR headset to directly demonstrate how a robot should do things like grasping. It is able to learn directly from pixels to actions in only about 30 minutes or less of human demonstrations.
 
 __Third Person Imitation Learning__:
 Third person imitation learning is obviously a bold goal, and would have fantastic implications. Like perhaps a robot could just watch youtube all day at 10000x speed and then learn how to do everything. 
