@@ -200,6 +200,12 @@ Learning the model can be done with simple techniques such as linearizing the sy
 
 Once you have the model, you can do a number of different things to get a policy out of it. You could do some sort of planning, like Monte-Carlo Tree Search (MCTS) for discrete case, or iterative LQR for continuous spaces. You could also just use your model and run your favorite model-free algorithm by running simulations on your model like in the Dyna algorithm. Finally, you could do some sort of planning during training (planning is expensive to run), and train a system to imitate the planned trajectories to speed up the policy at test time.
 
+# Model-Based Model-Free Combination 
+
+[Neural Network Dynamics for Model-Based Deep Reinforcement Learning with Model-Free Fine-Tuning](https://arxiv.org/abs/1708.02596) trains a neural network for the model dynamics, train a model based RL algorithm using the model, then use that model based algorithm to intialize a model-free algorithm, and then fine tune using the model-free algorithm.
+
+Dyna algorithm
+
 Guided Policy Search
 Predictron
 Value Iteration Networks
