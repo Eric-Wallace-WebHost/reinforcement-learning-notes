@@ -194,39 +194,15 @@ I wonder if anyone has tried to do pretraining of convolution layers. Say do obj
 
 # Model Based Reinforcement Learning
 
-At a high level, you use a model of the enviroment (continuous or discrete) to do some sort of planning or simulation in order to generate your policy. 
-
-This model can be given in the simple case (you know the MDP, or maybe you know physics, or you have a simulator or something) or in practice we more generally try to learn the model.
+At a high level, you use samples from the environment to learn some model of the environment. This model can be local (for a small region of state space) or global. Once you have a model, you can select actions in a variety of ways.
 
 Learning the model can be done with simple techniques such as linearizing the system and using finite differences, or more recently treating the model dynamics as a supervised learning problem and training a deep network.
 
-## Control Systems Based Approaches (Continuous Domains)
-If the underlying physical dynamics of a continuous system are known, then we can use control theory to solve these types of problems. 
-
-There is an algorithm known as LQR which can do control. It can output the necessary sequence of actions to do something like push a puck to a target. 
-
-Model Predictive Control (MPC) is an algorithm which repeatedly runs LQR at each timestep to adjust for pertubations and errors.
-
-__TODO__: Finish writing this section after watching rest of Berkeley Lectures
-
-## Planning Based Approaches (Discrete Domains)
-MCTS
-_TODO_: 
-Finish writing this section after watching rest of Berkeley Lectures
-
-## Model Based & Model Free Combinations
-DYNA Algorithm
-
-__TODO__: This is mentioned in David Silver's lectures
+Once you have the model, you can do a number of different things to get a policy out of it. You could do some sort of planning, like Monte-Carlo Tree Search (MCTS) for discrete case, or iterative LQR for continuous spaces. You could also just use your model and run your favorite model-free algorithm by running simulations on your model like in the Dyna algorithm. Finally, you could do some sort of planning during training (planning is expensive to run), and train a system to imitate the planned trajectories to speed up the policy at test time.
 
 Guided Policy Search
-
-
 Predictron
-
 Value Iteration Networks
-
-
 
 # Derivative Free Optimization
 A broad class of algorithms that consists of things like Genetic Algorithms, Evolutionary Algorithms, Evolutionary Search, and closely related others. Most of these algorithms are essentially random parameter search + heuristics. In the case when a derivative can be computed analytically (supervised learning, Q learning, policy gradients using reinforce trick), these algorithms are dumb because they don't move in that direction.
@@ -234,7 +210,6 @@ A broad class of algorithms that consists of things like Genetic Algorithms, Evo
 The only main advantage of these algorithms is that they can be scaled really well in parallel. The best paper is OpenAI's work that uses a clever trick where the seperate workers exchange what random seed they used rather than the actual parameters of the system. 
 
 [Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864) uses a very clever trick to parallelize Evolution Strategies to train tasks. The main advantage of using an approach like this that is has great wall clock time if you parallelize it really well, and also that it can learn very diverse policies because it searches through the parameter weights. A nice package and blog post is listed [here](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/).
-
 
 
 # Parallel Training of Reinforcement Learning:
