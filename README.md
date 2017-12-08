@@ -249,6 +249,8 @@ Dataset Aggregation Algorithm (DAgger) is a simple online learning algorithm tha
 
 [Deep Imitation Learning for Complex Manipulation Tasks from Virtual Reality Teleoperation](https://arxiv.org/abs/1710.04615) This paper is really good. They use a VR headset to directly demonstrate how a robot should do things like grasping. It is able to learn directly from pixels to actions in only about 30 minutes or less of human demonstrations.
 
+[Overcoming Exploration in Reinforcement Learning with Demonstrations](https://arxiv.org/pdf/1709.10089.pdf) uses hindsight experience replay + DDPG + demonstrations to learn continuous control on simulated and real robots.
+
 __Third Person Imitation Learning__:
 
 Third person imitation learning is obviously a bold goal, and would have fantastic implications. Like perhaps a robot could just watch youtube all day at 10000x speed and then learn how to do everything. 
