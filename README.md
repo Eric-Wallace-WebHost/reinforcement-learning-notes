@@ -47,6 +47,8 @@ The high level view of the vanilla Policy Gradient Algorithm looks like the foll
 
 [Vanilla Policy Gradient Psuedo-Code/Algorithm](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/images/vanillaPG.png)
 
+[Nice Deriviations](https://www.alexirpan.com/rl-derivations/) of REINFORCE, state-dependent baseline, and others.
+
 __Estimating the Advantage Function__:
 
 To get a good estimate of the advantage function, this is what is done in practice. 
