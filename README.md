@@ -198,15 +198,20 @@ I wonder if anyone has tried to do pretraining of convolution layers. Say do obj
 
 # Model Based Reinforcement Learning
 
-At a high level, you use samples from the environment to learn some model of the environment. This model can be local (for a small region of state space) or global. Once you have a model, you can select actions in a variety of ways.
+At a high level, you use samples from the environment to learn some model of the environment. This model can be local (for a small region of state space) or global. Once you have a model, you can use it in a variety of ways.
 
 Learning the model can be done with simple techniques such as linearizing the system and using finite differences, or more recently treating the model dynamics as a supervised learning problem and training a deep network.
 
-Once you have the model, you can do a number of different things to get a policy out of it. You could do some sort of planning, like Monte-Carlo Tree Search (MCTS) for discrete case, or iterative LQR for continuous spaces. You could also just use your model and run your favorite model-free algorithm by running simulations on your model like in the Dyna algorithm. Finally, you could do some sort of planning during training (planning is expensive to run), and train a system to imitate the planned trajectories to speed up the policy at test time.
+Once you have the model, you can do a number of different things to get a policy out of it. At a high level, some of the different methods include:
+  * Planning - In the discrete case you can do planning via Monte-Carlo Tree Search, or some sort of shooting method like iterative LQR with Model Predictive Control (MPC). Planning means that you look forward using your model, see how things end up, and choose actions which put you in a good place. Planning methods can be very computational expensive, as you might have to do many forward passes of your model before deciding a single action. That is, running your neural network is in the inner loop of the optimization procedure, rather than your neural network being your policy as in something like policy gradients.
+  * Imitating a planning system - You can use model to plan, and then train a system to imitate the trajectories generated from that plan. This is basically a function approximator way to get rid of the expensive planning methods. You could also use that imitated policy as an initializion, and then finetune it using another method like policy gradients.
+  * Generate samples using your model - You can use the model to generate fake experience from the world to train another model (usually your favorite model-free algorithm). This could theoretical help the sample complexity of your model-free algorithm, but in practice both your model will be wrong and your model free algorithm will be wrong, so you will struggle overall. [One such recent paper](https://arxiv.org/abs/1711.10137) uses a Dyna-like algorithm to do robot navigation. 
 
 # Model-Based Model-Free Combination 
 
 [Neural Network Dynamics for Model-Based Deep Reinforcement Learning with Model-Free Fine-Tuning](https://arxiv.org/abs/1708.02596) trains a neural network for the model dynamics, train a model based RL algorithm using the model, then use that model based algorithm to intialize a model-free algorithm, and then fine tune using the model-free algorithm.
+
+[Imagination Augmented Agents](https://arxiv.org/abs/1707.06203)
 
 Dyna algorithm
 
@@ -219,8 +224,9 @@ A broad class of algorithms that consists of things like Genetic Algorithms, Evo
 
 The only main advantage of these algorithms is that they can be scaled really well in parallel. The best paper is OpenAI's work that uses a clever trick where the seperate workers exchange what random seed they used rather than the actual parameters of the system. 
 
-[Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864) uses a very clever trick to parallelize Evolution Strategies to train tasks. The main advantage of using an approach like this that is has great wall clock time if you parallelize it really well, and also that it can learn very diverse policies because it searches through the parameter weights. A nice package and blog post is listed [here](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/).
+[Evolution Strategies as a Scalable Alternative to Reinforcement Learning](https://arxiv.org/abs/1703.03864) uses a very clever trick to parallelize Evolution Strategies to train tasks. The trick is that rather than the agents sharing all of their parameters with a central server or one another (which would be quite expensive for large networks), they simply share the random seed they used. Then you can recompute locally what parameters each agent must have used. The main advantage of using an approach like this that is has great wall clock time if you parallelize it really well, and also that it can learn very diverse policies because it searches through the parameter weights. A nice package and blog post is listed [here](http://blog.otoro.net/2017/11/12/evolving-stable-strategies/).
 
+The other popular algorithms include things like cross-entropy method, CMA-ES, and others.
 
 # Parallel Training of Reinforcement Learning:
 
