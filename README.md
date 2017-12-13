@@ -354,3 +354,4 @@ It seems like doing Imitation Learning via a VR system, and running meta learnin
 * [John Schulman Lectures](https://www.youtube.com/watch?v=aUrX-rP_ss4)
 * [Berkeley Deep Reinforcement Learning Course](http://rll.berkeley.edu/deeprlcourse/)
 
+And of course the legendary Sutton and Barto textbook. 
