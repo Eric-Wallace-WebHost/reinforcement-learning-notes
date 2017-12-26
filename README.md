@@ -194,6 +194,8 @@ I wonder if anyone has tried to do pretraining of convolution layers. Say do obj
 
 [Hindsight Experience Replay](https://arxiv.org/abs/1707.01495) Use Q functions that also have a goal associated with them. Then, even when you make a mistake, you can get reward by changing the goal in hindsight and still getting reward.
 
+[Reverse Curriculum Generation](http://bair.berkeley.edu/blog/2017/12/20/reverse-curriculum/) assumes you can set the start state yourself (like in a robot maybe). Provides a method to do the start states in reverse from your goal to build a natural learning curriculum.
+
 [Natural Value Approximators: Learning when to Trust Past Estimates](http://papers.nips.cc/paper/6807-natural-value-approximators-learning-when-to-trust-past-estimates) has a simple idea that after you recieve a reward, the value function will probably drop. They adjust the Value function to account for this, which makes the output much closer to the true value function (jagged, non-smooth) versus the original neural network version (relatively smooth).
 
 # Model Based Reinforcement Learning
