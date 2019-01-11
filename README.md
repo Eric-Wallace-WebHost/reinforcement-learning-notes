@@ -1,4 +1,3 @@
-https://arxiv.org/pdf/1705.05363.pdf
 This read me contains notes on a number of Reinforcement Learning papers and algorithms. The main focus is on Deep Reinforcement Learning with papers starting from 2013.
 
 If you are new to the field, I recommend taking a look at the [Learning Resources](https://github.com/Eric-Wallace/reinforcement-learning-notes/blob/master/README.md#learning-resources) at the end of the read me.
